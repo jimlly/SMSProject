@@ -1,0 +1,8 @@
+﻿一、B/S网站使用
+1、拷贝Log4Net.config到Web站点根目录（类似通常Web.config所在的目录），并添加到解决方案中
+2、将Log4Net.config在解决方案中的复制属性设置为始终复制
+3、在网站的Global.asax.cs文件中，Application_Start()方法内，添加如下代码：
+var fileName = string.Format("{0}Log4Net.config", HttpContext.Current.Server.MapPath("/"));
+//初始化Log4net配置
+Public.Log.LogHelper.InitConfigWebApp(fileName);
+4、在Web.config中不用（不要）再添加Log4Net相关的配置

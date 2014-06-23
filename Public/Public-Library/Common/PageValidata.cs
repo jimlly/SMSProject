@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
-using Public.Helper;
-
 
 namespace Public.Common
 {
@@ -474,7 +474,7 @@ namespace Public.Common
         }
         #endregion
 
-        
+
 
         #region 验证是否为整数
         /// <summary>
@@ -500,7 +500,7 @@ namespace Public.Common
         }
         #endregion
 
-        
+
 
         #region 验证日期是否合法
         /// <summary>
