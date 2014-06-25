@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{86FDD50F-424D-476E-B527-08412FBDC5FB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Public</RootNamespace>
+    <AssemblyName>Public.CL</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Jayrock.Json">
+      <HintPath>..\..\DLL\Jayrock.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\DLL\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\..\DLL\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\..\DLL\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cahe\Cache.cs" />
+    <Compile Include="Cahe\MainKey.cs" />
+    <Compile Include="Common\BindDataControl.cs" />
+    <Compile Include="Common\ChartHelper.cs" />
+    <Compile Include="Common\DataCache.cs" />
+    <Compile Include="Common\FormulaCalculator.cs" />
+    <Compile Include="Common\FormulaExpress.cs" />
+    <Compile Include="Common\HtmlPager.cs" />
+    <Compile Include="Common\HttpProc.cs" />
+    <Compile Include="Common\INIFile.cs" />
+    <Compile Include="Common\MailPoper.cs" />
+    <Compile Include="Common\MailSender.cs" />
+    <Compile Include="Common\MessageBox.cs" />
+    <Compile Include="Common\ObjectExtion.cs" />
+    <Compile Include="Common\OWCChart11.cs" />
+    <Compile Include="Common\PageValidata.cs" />
+    <Compile Include="Common\Pagination.cs" />
+    <Compile Include="Common\QueryString.cs" />
+    <Compile Include="Common\RegexHelper.cs" />
+    <Compile Include="Common\UrlOper.cs" />
+    <Compile Include="Common\ValidateImg.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\YtSecurity.cs" />
+    <Compile Include="DB\DBSource.cs" />
+    <Compile Include="DB\IDatabase.cs" />
+    <Compile Include="DB\ITransaction.cs" />
+    <Compile Include="DB\MssqlDatabase.cs" />
+    <Compile Include="DB\SqlComponents.cs" />
+    <Compile Include="DEncrypt\DEncrypt.cs" />
+    <Compile Include="DEncrypt\DESEncrypt.cs" />
+    <Compile Include="DEncrypt\HashEncode.cs" />
+    <Compile Include="DEncrypt\RSACryption.cs" />
+    <Compile Include="DEncrypt\Security.cs" />
+    <Compile Include="Helper\ConfigHelper.cs" />
+    <Compile Include="Helper\ConvertHelper.cs" />
+    <Compile Include="Helper\CookieHelper.cs" />
+    <Compile Include="Helper\DirFileHelper.cs" />
+    <Compile Include="Helper\DownLoadHelper.cs" />
+    <Compile Include="Helper\ExcelHelper.cs" />
+    <Compile Include="Helper\FTPHelper.cs" />
+    <Compile Include="Helper\IpHelper.cs" />
+    <Compile Include="Helper\JavaScriptHelper.cs" />
+    <Compile Include="Helper\MailHelper.cs" />
+    <Compile Include="Helper\MediaHandlerHelper.cs" />
+    <Compile Include="Helper\NetHelper.cs" />
+    <Compile Include="Helper\PicDealHelper.cs" />
+    <Compile Include="Helper\RandomHelper.cs" />
+    <Compile Include="Helper\RegexHelper.cs" />
+    <Compile Include="Helper\RmbHelper.cs" />
+    <Compile Include="Helper\SessionHelper.cs" />
+    <Compile Include="Helper\StringHelper.cs" />
+    <Compile Include="Helper\SysHelper.cs" />
+    <Compile Include="Helper\TimeHelper.cs" />
+    <Compile Include="Helper\WebSitePathHelper.cs" />
+    <Compile Include="Json\JsonHelper.cs" />
+    <Compile Include="Log\BaseLogBuilder.cs" />
+    <Compile Include="Log\FunctionLogBuilder.cs" />
+    <Compile Include="Log\LogBuilder.cs" />
+    <Compile Include="Log\LogHelper.cs" />
+    <Compile Include="Result\BaseResult.cs" />
+    <Compile Include="Xml\XmlHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Log\Log4Net.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Log\日志类使用说明.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
