@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +41,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="ContactGroupInfo.cs" />
+    <Compile Include="ContactInfo.cs" />
+    <Compile Include="Contactor.cs" />
+    <Compile Include="ContactorGroup.cs" />
+    <Compile Include="ContactWay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Result\ResultContactGroupList.cs" />
+    <Compile Include="Result\ResultContactList.cs" />
+    <Compile Include="Result\ResultContactorDetail.cs" />
+    <Compile Include="Result\ResultContactorGroupList.cs" />
+    <Compile Include="Result\ResultContactorList.cs" />
+    <Compile Include="XmlContactWay.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Public\Public-Library\Public-Library.csproj">
+      <Project>{86fdd50f-424d-476e-b527-08412fbdc5fb}</Project>
+      <Name>Public-Library</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

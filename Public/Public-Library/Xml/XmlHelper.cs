@@ -281,7 +281,8 @@ namespace Public.Xml
             MemoryStream stream = new MemoryStream();
             serializer.Serialize(stream, t);
             string str = Encoding.UTF8.GetString(stream.ToArray());
-            return str;
+            string result = str.ToString().Replace("utf-16", "utf-8");
+            return result;
         }
 
 
