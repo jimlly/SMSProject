@@ -21,7 +21,7 @@ namespace SMS.SQLServerDAL.Addr
         private string _procName;
         private LogBuilder _log;
         private const string ClassName = "ContactorDAL";
-        private readonly string _databaseName = "AddressBook";
+        private readonly string _databaseName = "SMS";
         private string _methodName;
         private readonly MssqlDatabase _addrDatabase;
 
@@ -34,7 +34,7 @@ namespace SMS.SQLServerDAL.Addr
         public ContactorDAL()
         {
             _procName = "";
-            _databaseName = "AddressBook";
+            _databaseName = "SMS";
 
             try
             {
@@ -57,13 +57,13 @@ namespace SMS.SQLServerDAL.Addr
         #endregion
 
 
-        public BaseResult AddContactor(int seqNo, Contactor contactor, int compId)
+        public BaseResult AddContactor(int userId, Contactor contactor, int compId)
         {
             var rs = new BaseResult { State = false, Value = -1, Desc = "数据操作层初始化" };
 
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
 
@@ -84,7 +84,7 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
 
             try
             {
@@ -110,7 +110,7 @@ namespace SMS.SQLServerDAL.Addr
 
                 var parameters = new[]
                     {
-                        _addrDatabase.MakeInParam("@SeqNo", SqlDbType.Int, 4, seqNo),
+                        _addrDatabase.MakeInParam("@userId", SqlDbType.Int, 4, userId),
                         _addrDatabase.MakeInParam("@CompID", SqlDbType.Int, 4, compId),
                         _addrDatabase.MakeInParam("@Name", SqlDbType.VarChar, 20, contactor.ContactorName),
                         _addrDatabase.MakeInParam("@ContactWay", SqlDbType.Xml, int.MaxValue, wayData),
@@ -141,12 +141,12 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public BaseResult DelContactors(int seqNo, List<Contactor> contactors, int compId)
+        public BaseResult DelContactors(int userId, List<Contactor> contactors, int compId)
         {
             var rs = new BaseResult { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
 
@@ -167,7 +167,7 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
 
             try
             {
@@ -176,7 +176,7 @@ namespace SMS.SQLServerDAL.Addr
 
                 var parameters = new[]
                     {
-                        _addrDatabase.MakeInParam("@SeqNo", SqlDbType.Int, 4, seqNo),
+                        _addrDatabase.MakeInParam("@userId", SqlDbType.Int, 4, userId),
                         _addrDatabase.MakeInParam("@ContactorIDList", SqlDbType.VarChar, 256, contactorIDList),
                         _addrDatabase.MakeOutParam("@Result", SqlDbType.Int)
                     };
@@ -204,12 +204,12 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public BaseResult DelContactorsByGroup(int seqNo, List<Contactor> contactors, int compId, int groupId)
+        public BaseResult DelContactorsByGroup(int userId, List<Contactor> contactors, int compId, int groupId)
         {
             var rs = new BaseResult { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
 
@@ -235,7 +235,7 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
 
             try
             {
@@ -244,7 +244,7 @@ namespace SMS.SQLServerDAL.Addr
 
                 var parameters = new[]
                     {
-                        _addrDatabase.MakeInParam("@SeqNo", SqlDbType.Int, 4, seqNo),
+                        _addrDatabase.MakeInParam("@userId", SqlDbType.Int, 4, userId),
                         _addrDatabase.MakeInParam("@ContactorIDList", SqlDbType.VarChar, 256, contactorIDList),
                         _addrDatabase.MakeInParam("@ContactGroupID", SqlDbType.Int,4,groupId)
                     };
@@ -272,12 +272,12 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public ResultContactorDetail GetDetail(int seqNo, int contactorID, int compId)
+        public ResultContactorDetail GetDetail(int userId, int contactorID, int compId)
         {
             var rs = new ResultContactorDetail { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
 
@@ -298,7 +298,7 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
             _log.Append("contactorID", contactorID);
 
             try
@@ -384,12 +384,12 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public BaseResult SetContactorGroups(int seqNo, List<ContactorGroup> groups, int contactorID, int compId)
+        public BaseResult SetContactorGroups(int userId, List<ContactorGroup> groups, int contactorID, int compId)
         {
             var rs = new BaseResult { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
 
@@ -417,7 +417,7 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
             _log.Append(" List<MODEL.Addr.ContactorGroup>", groups);
             _log.Append("contactorID", contactorID);
 
@@ -437,7 +437,7 @@ namespace SMS.SQLServerDAL.Addr
 
                 var parameters = new[]
                     {
-                        _addrDatabase.MakeInParam("@SeqNo", SqlDbType.Int, 4, seqNo),
+                        _addrDatabase.MakeInParam("@userId", SqlDbType.Int, 4, userId),
                         _addrDatabase.MakeInParam("@CompID", SqlDbType.Int, 4, compId),
                         _addrDatabase.MakeInParam("@ContactorID", SqlDbType.Int, 4, contactorID),
                         _addrDatabase.MakeInParam("@ContactorGroupIDList", SqlDbType.Xml, int.MaxValue, groupData)
@@ -466,12 +466,12 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public BaseResult SetName(int seqNo, int contactorID, string name, int compId)
+        public BaseResult SetName(int userId, int contactorID, string name, int compId)
         {
             var rs = new BaseResult { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
             if (contactorID <= 0)
@@ -497,7 +497,7 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
             _log.Append("contactorID", contactorID);
             _log.Append("name", name);
 
@@ -535,12 +535,12 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public BaseResult SetContactWay(int seqNo, int contactorID, List<ContactWay> cWay, int compId, string confParticipatePhoneNo)
+        public BaseResult SetContactWay(int userId, int contactorID, List<ContactWay> cWay, int compId, string confParticipatePhoneNo)
         {
             var rs = new BaseResult { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
             if (contactorID <= 0)
@@ -566,7 +566,7 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
             _log.Append("contactorID", contactorID);
             _log.Append("ContactWay", cWay);
 
@@ -590,7 +590,7 @@ namespace SMS.SQLServerDAL.Addr
 
                 var parameters = new[]
                     {
-                        _addrDatabase.MakeInParam("@SeqNo", SqlDbType.Int, 4, seqNo),
+                        _addrDatabase.MakeInParam("@userId", SqlDbType.Int, 4, userId),
                         _addrDatabase.MakeInParam("@CompID", SqlDbType.Int, 4, compId),
                         _addrDatabase.MakeInParam("@ContactorID", SqlDbType.BigInt, 4, contactorID),
                         _addrDatabase.MakeInParam("@ContactWay", SqlDbType.Xml, int.MaxValue, wayData),
@@ -620,12 +620,12 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public BaseResult ContactWaySync(int seqNo, int compId)
+        public BaseResult ContactWaySync(int userId, int compId)
         {
             var rs = new BaseResult { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
 
@@ -640,14 +640,14 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
 
 
             try
             {
                 SqlParameter[] parameters =
                     {
-                        _addrDatabase.MakeInParam("@SeqNo", SqlDbType.BigInt, 4, seqNo),
+                        _addrDatabase.MakeInParam("@userId", SqlDbType.BigInt, 4, userId),
                         _addrDatabase.MakeInParam("@CompID", SqlDbType.NVarChar, 20, compId)
                     };
 

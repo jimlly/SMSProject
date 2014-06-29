@@ -22,7 +22,7 @@ namespace SMS.SQLServerDAL.Addr
         private string _procName;
         private LogBuilder _log;
         private const string ClassName = "ContactorGroupDAL";
-        private readonly string _databaseName = "AddressBook";
+        private readonly string _databaseName = "SMS";
         private string _methodName;
         private readonly MssqlDatabase _addrDatabase;
         const int SharedFlag = 0; //共享标识 0 – 所有的（默认）
@@ -37,7 +37,7 @@ namespace SMS.SQLServerDAL.Addr
         public ContactorGroupDAL()
         {
             _procName = "";
-            _databaseName = "AddressBook";
+            _databaseName = "SMS";
 
             try
             {
@@ -59,12 +59,12 @@ namespace SMS.SQLServerDAL.Addr
 
         #endregion
 
-        public ResultContactorGroupList GetGroups(int seqNo, int compId, int pageIndex, int pageSize,string search)
+        public ResultContactorGroupList GetGroups(int userId, int compId, int pageIndex, int pageSize,string search)
         {
             var rs = new ResultContactorGroupList { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
 
@@ -79,13 +79,13 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
 
             try
             {
                 var parameters = new[]
                     {
-                        _addrDatabase.MakeInParam("@SeqNo", SqlDbType.Int, 4, seqNo),
+                        _addrDatabase.MakeInParam("@userId", SqlDbType.Int, 4, userId),
                         _addrDatabase.MakeInParam("@CompID", SqlDbType.Int, 4, compId),
                         _addrDatabase.MakeInParam("@SharedFlag", SqlDbType.Int, 4, SharedFlag),
                         _addrDatabase.MakeInParam("@PageIndex", SqlDbType.Int, 4, pageIndex),
@@ -129,13 +129,13 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public BaseResult AddGroup(int seqNo, string groupName, int compId)
+        public BaseResult AddGroup(int userId, string groupName, int compId)
         {
             var rs = new BaseResult { State = false, Value = -1, Desc = "数据操作层初始化" };
             var groupId = 0;
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
             if (string.IsNullOrEmpty(groupName))
@@ -156,7 +156,7 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
             _log.Append("groupName", groupName);
 
             try
@@ -166,7 +166,7 @@ namespace SMS.SQLServerDAL.Addr
 
                 var parameters = new[]
                     {
-                        _addrDatabase.MakeInParam("@SeqNo", SqlDbType.Int, 4, seqNo),
+                        _addrDatabase.MakeInParam("@userId", SqlDbType.Int, 4, userId),
                         _addrDatabase.MakeInParam("@CompID", SqlDbType.Int, 4, compId),
                         _addrDatabase.MakeInParam("@SharedFlag", SqlDbType.Int, 4, shareFlag),
                         _addrDatabase.MakeInParam("@GroupName", SqlDbType.VarChar, 50, groupName),
@@ -204,12 +204,12 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public BaseResult SetGroupName(int seqNo, int groupID, string groupName, int compId)
+        public BaseResult SetGroupName(int userId, int groupID, string groupName, int compId)
         {
             var rs = new BaseResult { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
             if (groupID <= 0)
@@ -235,7 +235,7 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
             _log.Append("groupID", groupID);
             _log.Append("groupName", groupName);
 
@@ -246,7 +246,7 @@ namespace SMS.SQLServerDAL.Addr
 
                 var parameters = new[]
                     {
-                        _addrDatabase.MakeInParam("@SeqNo", SqlDbType.Int, 4, seqNo),
+                        _addrDatabase.MakeInParam("@userId", SqlDbType.Int, 4, userId),
                         _addrDatabase.MakeInParam("@CompID", SqlDbType.Int, 4, compId),
                         _addrDatabase.MakeInParam("@Shared", SqlDbType.Int, 4, shareFlag),
                         _addrDatabase.MakeInParam("@GroupName", SqlDbType.VarChar, 50, groupName),
@@ -282,12 +282,12 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public BaseResult DelGroups(int seqNo, List<ContactorGroup> groups, int compId)
+        public BaseResult DelGroups(int userId, List<ContactorGroup> groups, int compId)
         {
             var rs = new BaseResult { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
 
@@ -309,7 +309,7 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
             _log.Append("List<ContactorGroup>", groups);
 
             try
@@ -319,7 +319,7 @@ namespace SMS.SQLServerDAL.Addr
 
                 var parameters = new[]
                     {
-                        _addrDatabase.MakeInParam("@SeqNo", SqlDbType.Int, 4, seqNo),
+                        _addrDatabase.MakeInParam("@userId", SqlDbType.Int, 4, userId),
                         _addrDatabase.MakeInParam("@CompID", SqlDbType.Int, 4, compId),
                         _addrDatabase.MakeInParam("@ContactGroupIDsList", SqlDbType.VarChar, 256, groupIdList),
                         _addrDatabase.MakeOutParam("@Result", SqlDbType.Int)
@@ -348,12 +348,12 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public BaseResult CopyContactorsToOtherGroups(int seqNo, List<ContactorGroup> groups, List<Contactor> contactors, int compId)
+        public BaseResult CopyContactorsToOtherGroups(int userId, List<ContactorGroup> groups, List<Contactor> contactors, int compId)
         {
             var rs = new BaseResult { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
 
@@ -382,7 +382,7 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
             _log.Append("List<ContactorGroup>", groups);
             _log.Append(" List<Contactor>", contactors);
 
@@ -410,7 +410,7 @@ namespace SMS.SQLServerDAL.Addr
                 var parameters = new[]
                     {
                         _addrDatabase.MakeInParam("@CompID", SqlDbType.Int, 4, compId),
-                        _addrDatabase.MakeInParam("@SeqNo", SqlDbType.Int, 4, seqNo),
+                        _addrDatabase.MakeInParam("@userId", SqlDbType.Int, 4, userId),
                         _addrDatabase.MakeInParam("@ContactorList", SqlDbType.Xml, int.MaxValue, contactorData),
                         _addrDatabase.MakeInParam("@GroupList", SqlDbType.Xml, int.MaxValue, groupData),
                     };
@@ -438,12 +438,12 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public BaseResult RemoveContactors(int seqNo, List<ContactorGroup> groups, List<Contactor> contactors, int compId)
+        public BaseResult RemoveContactors(int userId, List<ContactorGroup> groups, List<Contactor> contactors, int compId)
         {
             var rs = new BaseResult { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
 
@@ -472,7 +472,7 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
             _log.Append("List<ContactorGroup>", groups);
             _log.Append(" List<Contactor>", contactors);
 
@@ -480,7 +480,7 @@ namespace SMS.SQLServerDAL.Addr
             {
                 var parameters = new[]
                                                 {
-                     _addrDatabase.MakeInParam("@SeqNo",SqlDbType.Int,4,seqNo),//todo;
+                     _addrDatabase.MakeInParam("@userId",SqlDbType.Int,4,userId),//todo;
                    
                                                 };
                 _addrDatabase.ExecuteProc(_procName, parameters, out _result);
@@ -507,12 +507,12 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public ResultContactorList GetAllContactors(int seqNo, int compId, int pageIndex, int pageSize, string searchContent)
+        public ResultContactorList GetAllContactors(int userId, int compId, int pageIndex, int pageSize, string searchContent)
         {
             var rs = new ResultContactorList { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
 
@@ -527,13 +527,13 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
 
             try
             {
                 var parameters = new[]
                     {
-                        _addrDatabase.MakeInParam("@SeqNo", SqlDbType.Int, 4, seqNo),
+                        _addrDatabase.MakeInParam("@userId", SqlDbType.Int, 4, userId),
                         _addrDatabase.MakeInParam("@CompID", SqlDbType.Int, 4, compId),
                         _addrDatabase.MakeInParam("@SharedFlag", SqlDbType.Int, 4, SharedFlag),
                         _addrDatabase.MakeInParam("@PageIndex", SqlDbType.Int, 4, pageIndex),
@@ -578,12 +578,12 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public ResultContactorList GetUnGroupedContactors(int seqNo, int compId, int pageIndex, int pageSize, string searchContent)
+        public ResultContactorList GetUnGroupedContactors(int userId, int compId, int pageIndex, int pageSize, string searchContent)
         {
             var rs = new ResultContactorList { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
 
@@ -598,13 +598,13 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
 
             try
             {
                 var parameters = new[]
                     {
-                        _addrDatabase.MakeInParam("@SeqNo", SqlDbType.Int, 4, seqNo),
+                        _addrDatabase.MakeInParam("@userId", SqlDbType.Int, 4, userId),
                         _addrDatabase.MakeInParam("@CompID", SqlDbType.Int, 4, compId),
                         _addrDatabase.MakeInParam("@SharedFlag", SqlDbType.Int, 4, SharedFlag),
                         _addrDatabase.MakeInParam("@PageIndex", SqlDbType.Int, 4, pageIndex),
@@ -649,12 +649,12 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public ResultContactorList GetUserGroupContactors(int seqNo, int groupID, int compId, int pageIndex, int pageSize, string searchContent)
+        public ResultContactorList GetUserGroupContactors(int userId, int groupID, int compId, int pageIndex, int pageSize, string searchContent)
         {
             var rs = new ResultContactorList { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
 
@@ -669,13 +669,13 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
 
             try
             {
                 var parameters = new[]
                     {
-                        _addrDatabase.MakeInParam("@SeqNo", SqlDbType.Int, 4, seqNo),
+                        _addrDatabase.MakeInParam("@userId", SqlDbType.Int, 4, userId),
                         _addrDatabase.MakeInParam("@CompID", SqlDbType.Int, 4, compId),
                         _addrDatabase.MakeInParam("@GroupID", SqlDbType.Int, 4, groupID),
                         _addrDatabase.MakeInParam("@SharedFlag", SqlDbType.Int, 4, SharedFlag),
@@ -721,12 +721,12 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public BaseResult GetContactorsCount(int seqNo, int groupID, int compId, string searchContent)
+        public BaseResult GetContactorsCount(int userId, int groupID, int compId, string searchContent)
         {
             var rs = new ResultContactorList { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (seqNo <= 0)
+            if (userId <= 0)
             {
-                rs.Failed(-101, "seqNo无效");
+                rs.Failed(-101, "userId无效");
                 return rs;
             }
 
@@ -741,14 +741,14 @@ namespace SMS.SQLServerDAL.Addr
                 Database = _databaseName,
                 StroreProcedure = _procName
             };
-            _log.Append("SeqNo", seqNo);
+            _log.Append("userId", userId);
 
             int count;
             try
             {
                 var parameters = new[]
                     {
-                        _addrDatabase.MakeInParam("@SeqNo", SqlDbType.Int, 4, seqNo),
+                        _addrDatabase.MakeInParam("@userId", SqlDbType.Int, 4, userId),
                         _addrDatabase.MakeInParam("@CompID", SqlDbType.Int, 4, compId),
                         _addrDatabase.MakeInParam("@GroupID", SqlDbType.Int, 4, groupID),
                         _addrDatabase.MakeInParam("@SharedFlag", SqlDbType.Int, 4, SharedFlag),
