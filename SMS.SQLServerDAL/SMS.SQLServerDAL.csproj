@@ -49,6 +49,10 @@
       <Project>{86fdd50f-424d-476e-b527-08412fbdc5fb}</Project>
       <Name>Public-Library</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SMS.IDAL\SMS.IDAL.csproj">
+      <Project>{bf35af19-3d93-4d5c-9f60-d16ccfe711da}</Project>
+      <Name>SMS.IDAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SMS.Model\SMS.Model.csproj">
       <Project>{091e37ec-8833-4c58-bbe6-980e9dec8694}</Project>
       <Name>SMS.Model</Name>

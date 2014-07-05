@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Public-Library", "Public\Pu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMS.IDAL", "SMS.IDAL\SMS.IDAL.csproj", "{BF35AF19-3D93-4D5C-9F60-D16CCFE711DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMS.BLL", "SMS.BLL\SMS.BLL.csproj", "{E3633F52-A388-4084-A15B-7ED9C712A9D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{BF35AF19-3D93-4D5C-9F60-D16CCFE711DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF35AF19-3D93-4D5C-9F60-D16CCFE711DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF35AF19-3D93-4D5C-9F60-D16CCFE711DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3633F52-A388-4084-A15B-7ED9C712A9D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3633F52-A388-4084-A15B-7ED9C712A9D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3633F52-A388-4084-A15B-7ED9C712A9D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3633F52-A388-4084-A15B-7ED9C712A9D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

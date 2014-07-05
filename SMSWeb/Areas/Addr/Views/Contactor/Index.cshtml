@@ -1,7 +1,12 @@
-﻿@{
+﻿@using SMSWeb.Common;
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+
+
 <div class="breadcrumbs" id="breadcrumbs">
     <script type="text/javascript">
         try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
@@ -16,7 +21,7 @@
     </ul>
     <!-- .breadcrumb -->
 
-   @* <div class="nav-search" id="nav-search">
+    @* <div class="nav-search" id="nav-search">
         <form class="form-search">
             <span class="input-icon">
                 <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
@@ -28,4 +33,146 @@
 </div>
 
 <div class="page-content">
+    <div class="page-header">
+        <h1>通讯录
+							
+            <small>
+                <i class="icon-double-angle-right"></i>
+                
+								</small>
+        </h1>
     </div>
+    <div class="container-fluid" id="pageContainer">
+        <div class="row">
+            <div class="col-xs-3 group-user" style="margin-top: 20px;">
+                <div id="leftOperate">
+                    <ul class="nav nav-list nav-list-top group-user-showtop">
+                        <li class="active pos-rel" id="liAll" onclick="li_click('liAll','所有联系人')"><a href="#">所有联系人</a><span class="badge badge-hover3" id="allSum">0</span></li>
+                        <li class="last pos-rel" onclick="li_click('liUnGrouped','未分组联系人')" id="liUnGrouped"><a href="#">未分组联系人</a><span class="badge badge-hover3" id="unGroupedSum">0</span></li>
+                    </ul>
+                    <ul id="ulGroup" class="nav nav-list"></ul>
+
+                    <div><a href="javascript:clickAddGroup()" id="addGroup" class="btn btn-block btn-primary">添加分组</a></div>
+                </div>
+
+                <input type="hidden" id="hidGroupId" value="0" />
+                <input type="hidden" id="hidGroupName" />
+            </div>
+            <!-- group user -->
+            <div class="col-xs-9 group-content" style="margin-top: 20px;">
+                <div id="right" class="well well-2">
+
+                    <div class="page-header">
+                        <h4 id="sp_groupName">所有联系人</h4>
+                    </div>
+                    <div id="divBts" class="mb-10 form-inline">
+                        <div class="div-search  pull-right">
+                            <input id="txt_SearchContent" type="text" />
+                            <input id="btn_Search" type="button" value="搜索" class="btn btn-primary" onclick="InitContactors()" />
+                        </div>
+                        <div style="position: relative; width: 350px;">
+                            <button class="btn btn-primary" type="button" id="btAdd" onclick="Fadein('',this)">新建</button>
+                            <button class="btn btn-primary" type="button" id="btDel" onclick="DelContact()">删除</button>
+                            <a class="btn btn-primary dropdown-toggle" href="#" onclick="managerShow()">管理组 <span class="caret"></span></a>
+                            <div id="div_GroupManager" style="margin-left: 105px;" class="dropdown-menu">
+                                <ul id="ul_mGroup" class="nav nav-list" style="max-height: 200px; overflow-y: auto;"></ul>
+                                <ul class="nav nav-list">
+                                    <li class="divider"></li>
+                                    <li class="buttons">
+                                        <p>
+                                            <button class="btn btn-small btn-primary" onclick="SetContactGroup()" type="button">确定</button>
+                                            <button class="btn btn-small btn-primary" onclick="managerShow()" id="dropDownCancel" type="button">取消</button>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button class="btn btn-primary" type="button" onclick="importXlsAddr()">导入/导出</button>
+                        </div>
+
+                    </div>
+                    <div class="form-inline mb-10" style="display: none;">
+                        每页显示
+                <select id="selSize" onchange="InitContactors()" style="width: 60px;">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+                        条信息
+               
+                    </div>
+
+                    <div id="divEdit" style="display: none;"></div>
+                    <div style="min-height: 225px;">
+
+                        <table class="table table-hover table-border2" id="tbAddress">
+                            <tr>
+                                <th>
+                                    <input type="checkbox" id="cbAll" onclick="cb_allclick()" /></th>
+                                <th>姓名</th>
+                                <th>联系号码</th>
+                                <th>分组</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="Pagination" class="pagination cf ac">
+                    </div>
+                    <input type="hidden" id="hidContactId" />
+                </div>
+            </div>
+            <!-- group content -->
+        </div>
+    </div>
+    <!-- edit -->
+    <div class="importandexport">
+        <div class="modal EditModel hide" id="ExchangeModel" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" onclick="ExchangeClose()">×</button>
+                    </div>
+
+                    <div class="modal-body">
+                        <ul class="nav nav-tabs" id="TabNav">
+                            <li class="Import active"><a href="javascript:void(0);">导入通讯录</a></li>
+                            <li class="Export "><a href="javascript:void(0);">导出通讯录</a></li>
+                        </ul>
+                        <iframe id="ifraExchage" frameborder="0" scrolling="no" width="100%" height="220"></iframe>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@section PageSection{
+    <link rel="stylesheet" type="text/css" href="@Url.StaticFile("~/assets/Css/style.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.StaticFile("~/assets/Css/pagination.css")">
+    <link href="@Url.StaticFile("~/assets/css/jquery.mCustomScrollbar.css")" rel="stylesheet" />
+    <script src="@Url.StaticFile("~/assets/js/jquery.mCustomScrollbar.js")"></script>
+    <script src="@Url.StaticFile("~/assets/js/jquery.pagination.js")"></script>
+    <script src="@Url.StaticFile("~/assets/js/jquery.mCustomScrollbar.js")"></script>
+    <script src="@Url.StaticFile("~/assets/js/jquery.json-2.4.js")"></script>
+    <script src="@Url.StaticFile("~/assets/js/AddrManage.js")"></script>
+    <script src="@Url.StaticFile("~/assets/js/EditAddress.js")"></script>
+    <script>
+
+        //验证组名
+        var checkGroupName = function (name) {
+            var groupNameRegex;
+            if (groupNameRegex.test(name)) {
+                return true;
+            }
+            return false;
+        };
+
+        //关闭弹出框
+        var ExchangeClose = function () {
+            $("loading").hide();
+            $("#ExchangeModel").hide();
+        }
+    </script>
+
+}

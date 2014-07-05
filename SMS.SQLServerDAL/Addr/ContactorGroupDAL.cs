@@ -10,10 +10,11 @@ using SMS.Model.Result;
 using Public.DB;
 using Public.Log;
 using Public.Result;
+using SMS.IDAL;
 
 namespace SMS.SQLServerDAL.Addr
 {
-    public class ContactorGroupDAL //: IContactorGroupDAL
+    public class ContactorGroupDAL : IContactorGroupDAL
     {
 
 

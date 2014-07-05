@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SMS.Model.Result;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -53,8 +55,13 @@ namespace SMSWeb.Areas.Addr.Controllers
         //
         // GET: /Addr/Contactor/Edit/5
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
+            int contactorId = 0; int groupId = 2;
+            //ViewData["ContactorID"] = contactorId;
+            //ViewData["GroupID"] = groupId;
+            ViewBag.ContactorID = contactorId;
+            ViewBag.GroupID = groupId;
             return View();
         }
 
@@ -100,6 +107,78 @@ namespace SMSWeb.Areas.Addr.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        public ContentResult GetContactorList()
+        {
+            var _rcl = new ResultContactorList();
+            try
+            {
+                string str;
+                int pageIndex = Convert.ToInt32(Request["pageindex"]);
+                int pageSize = Convert.ToInt32(Request["pagesize"]);
+                var searchContent =Request["search"];
+                var groupId = Convert.ToInt32(Request["groupid"]);
+
+
+
+                if (pageIndex == 0)
+                {
+                    pageIndex = 1;
+                }
+
+                if (groupId == -2) //未分组
+                {
+                    //_rcl = _cgm.GetUnGroupedContactors(LoginUser.SeqNo, LoginUser.CompID, pageIndex, pageSize, searchContent);
+                }
+                else if (groupId == 0)//全部
+                {
+                    //_rcl = _cgm.GetAllContactors(LoginUser.SeqNo, LoginUser.CompID, pageIndex, pageSize, searchContent);
+                }
+                else
+                {
+                   // _rcl = _cgm.GetUserGroupContactors(LoginUser.SeqNo, groupId, LoginUser.CompID, pageIndex, pageSize, searchContent);
+                }
+
+                if (!_rcl.State)
+                {
+                    //_log.Append("state", _rcl.State);
+                }
+                else
+                {
+                    var sb = new StringBuilder();
+                    foreach (var item in _rcl.Contactors)
+                    {
+                        var groupName = "";
+                        var groupIds = "";
+                        if (item.CGroups != null)
+                        {
+                            foreach (var contactorGroup in item.CGroups)
+                            {
+                                groupName += contactorGroup.ContactorGroupName + " ";
+                                groupIds += contactorGroup.ContactorGroupID + " ";
+                            }
+                        }
+                        sb.Append("<tr class=\"table-border-tr\">");
+                        sb.Append("<td><input type='checkbox' name='cbItem' value='" + item.ContactorID + "' /></td>");
+                        sb.Append("<td onclick=\"javascript:EditContact('" + item.ContactorID + "',this)\">" + item.ContactorName + "</td>");
+                        sb.Append("<td onclick=\"javascript:EditContact('" + item.ContactorID + "',this)\">" + item.ConfParticipatePhoneNo + "</td>");
+                        sb.Append("<td onclick=\"javascript:EditContact('" +
+                                  item.ContactorID + "',this)\">" + groupName + "</td>");
+                        sb.Append("<td id='adrTdGroup" + item.ContactorID + "' style='display:none'>" + groupIds + "</td></tr>");
+                        sb.Append("<tr class=\"table-border-hover\">");
+                        sb.Append("<td colspan='4' class=\"address-hidden pd-no\"  style=\"display: none;\" id='td" + item.ContactorID + "'></td></tr>");
+                    }
+                    str = sb.ToString();
+                    return Content(str);
+                }
+            }
+            catch (Exception ex)
+            {
+                //_log.Append("AddressPageHandler错误", ex.ToString());
+            }
+            return Content("");
         }
     }
 }

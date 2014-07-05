@@ -10,10 +10,11 @@ using Public.Result;
 using Public.Xml;
 using SMS.Model.Addr;
 using SMS.Model.Result;
+using SMS.IDAL;
 
 namespace SMS.SQLServerDAL.Addr
 {
-    public class ContactorDAL // IContactorDAL
+    public class ContactorDAL : IContactorDAL
     {
 
         #region 字段

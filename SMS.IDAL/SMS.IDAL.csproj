@@ -39,7 +39,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="IContactorDAL.cs" />
+    <Compile Include="IContactorGroupDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Public\Public-Library\Public-Library.csproj">
+      <Project>{86fdd50f-424d-476e-b527-08412fbdc5fb}</Project>
+      <Name>Public-Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SMS.Model\SMS.Model.csproj">
+      <Project>{091e37ec-8833-4c58-bbe6-980e9dec8694}</Project>
+      <Name>SMS.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
