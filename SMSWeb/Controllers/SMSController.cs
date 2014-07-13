@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -57,7 +58,20 @@ namespace SMSWeb.Controllers
             return View();
         }
         //
-      
+        [HttpPost]
+        public ActionResult GetSendList(FormCollection collection)
+        {
+            ArrayList list = new ArrayList();
+            for (int i = 0; i < 5; i++)
+            {
+                var data = new { Name = "任务名称"+i, Mobile = "138000" + new Random().Next(10000, 99999), Content = "测试内容"+i, DateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), State = "" + new Random().Next(1, 3).ToString() + "" };
+                list.Add(data);
+            }
+           
+            var objdata = new {draw=1,recordsTotal=100,recordsFiltered=100, data=list};
+
+            return Json(objdata, JsonRequestBehavior.AllowGet);
+        }
 
         //
         // GET: /SMS/Delete/5

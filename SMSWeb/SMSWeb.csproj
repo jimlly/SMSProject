@@ -387,6 +387,7 @@
     <Content Include="Assets\js\jquery-ui-1.10.3.full.min.js" />
     <Content Include="Assets\js\jquery.autosize.min.js" />
     <Content Include="Assets\js\jquery.colorbox-min.js" />
+    <Content Include="Assets\js\jquery.dataTables-1.10.min.js" />
     <Content Include="Assets\js\jquery.dataTables.bootstrap.js" />
     <Content Include="Assets\js\jquery.dataTables.min.js" />
     <Content Include="Assets\js\jquery.easy-pie-chart.min.js" />
@@ -535,7 +536,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>12049</DevelopmentServerPort>
+          <DevelopmentServerPort>12050</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:8248/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
