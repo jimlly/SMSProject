@@ -16,10 +16,7 @@ namespace SMSWeb.Controllers
         {
             return View();
         }
-        public ActionResult SendDetail()
-        {
-            return View();
-        }
+       
         //
         // GET: /SMS/Details/5
 
@@ -61,18 +58,46 @@ namespace SMSWeb.Controllers
         [HttpPost]
         public ActionResult GetSendList(FormCollection collection)
         {
-            ArrayList list = new ArrayList();
-            for (int i = 0; i < 5; i++)
+            List<dynamic> list = new List<dynamic>();
+           // ArrayList list = new ArrayList();
+            for (int i = 0; i < 50; i++)
             {
-                var data = new { Name = "任务名称"+i, Mobile = "138000" + new Random().Next(10000, 99999), Content = "测试内容"+i, DateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), State = "" + new Random().Next(1, 3).ToString() + "" };
+                var data = new {ID= i, Name = "任务名称" + i, MsgID = DateTime.Now.Ticks.ToString(), Mobile = "138000" + new Random().Next(10000, 99999), Content = "测试内容" + i, SendTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), Amount = new Random().Next(1, 10), State = "" + new Random().Next(1, 3).ToString() + "",SendCount=new Random().Next(1, 100), SuccessCount = new Random().Next(1, 100), FailCount = new Random().Next(1, 100) };
                 list.Add(data);
             }
-           
-            var objdata = new {draw=1,recordsTotal=100,recordsFiltered=100, data=list};
+            var draw = collection["draw"];
+            var pageIndex = collection["start"];
+            var pageSize = collection["length"];
+            var temp = list.Skip(Convert.ToInt32(pageIndex)).Take(Convert.ToInt32(pageSize));
+
+            var objdata = new { draw = draw, recordsTotal = list.Count, recordsFiltered = list.Count, data = temp };
 
             return Json(objdata, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult SendDetail()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SendDetail(FormCollection collection)
+        {
+            List<dynamic> list = new List<dynamic>();
+            // ArrayList list = new ArrayList();
+            for (int i = 0; i < 50; i++)
+            {
+                var data = new { ID = i,Name="张三", MsgID = DateTime.Now.Ticks.ToString(), Mobile = "138000" + new Random().Next(10000, 99999), SendTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), Amount = new Random().Next(1, 10), State = "" + new Random().Next(1, 3).ToString() + "" };
+                list.Add(data);
+            }
+            var draw = collection["draw"];
+            var pageIndex = collection["start"];
+            var pageSize = collection["length"];
+            var temp = list.Skip(Convert.ToInt32(pageIndex)).Take(Convert.ToInt32(pageSize));
 
+            var objdata = new { draw = draw, recordsTotal = list.Count, recordsFiltered = list.Count, data = temp };
+
+            return Json(objdata, JsonRequestBehavior.AllowGet);
+            return View();
+        }
         //
         // GET: /SMS/Delete/5
 

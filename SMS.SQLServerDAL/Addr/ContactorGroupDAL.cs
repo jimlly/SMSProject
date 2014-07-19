@@ -23,7 +23,7 @@ namespace SMS.SQLServerDAL.Addr
         private string _procName;
         private LogBuilder _log;
         private const string ClassName = "ContactorGroupDAL";
-        private readonly string _databaseName = "SMS";
+        private readonly string _databaseName = "PubSMS";
         private string _methodName;
         private readonly MssqlDatabase _addrDatabase;
         const int SharedFlag = 0; //共享标识 0 – 所有的（默认）
@@ -147,7 +147,7 @@ namespace SMS.SQLServerDAL.Addr
 
 
             _desc = "某个终端客户新建联系人分组";
-            _procName = "Addr_SP_ContactGroup_CreateSingleCGroup";
+            _procName = "UP_Addr_ContactGroup_CreateSingleCGroup";
             _methodName = MethodBase.GetCurrentMethod().Name;
 
             _log = new LogBuilder
@@ -226,7 +226,7 @@ namespace SMS.SQLServerDAL.Addr
 
 
             _desc = "某个终端客户设置（修改）某个联系人分组名称";
-            _procName = "Addr_SP_ContactGroup_UpdateCGroupInfo";
+            _procName = "UP_Addr_ContactGroup_UpdateCGroupInfo";
             _methodName = MethodBase.GetCurrentMethod().Name;
 
             _log = new LogBuilder
@@ -300,7 +300,7 @@ namespace SMS.SQLServerDAL.Addr
             }
 
             _desc = "某个终端客户删除联系人分组，支持批量操作。";
-            _procName = "UP_ContactGroup_DeleteCGroups";
+            _procName = "UP_Addr_ContactGroup_DeleteCGroups";
             _methodName = MethodBase.GetCurrentMethod().Name;
 
             _log = new LogBuilder
@@ -373,7 +373,7 @@ namespace SMS.SQLServerDAL.Addr
             }
 
             _desc = "某个终端客户从某个分组中选择几个联系人并修改这些联系人所在的分组（仅拷贝到其它组，不涉及移除出本组/*如果所选分组不包含当前组，那么将从当前组中移除*/）。";
-            _procName = "Addr_SP_Contactor_AddMultiContactorToMultiGroup";
+            _procName = "UP_Addr_Contactor_AddMultiContactorToMultiGroup";
             _methodName = MethodBase.GetCurrentMethod().Name;
 
             _log = new LogBuilder

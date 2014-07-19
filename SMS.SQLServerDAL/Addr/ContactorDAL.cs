@@ -158,7 +158,7 @@ namespace SMS.SQLServerDAL.Addr
             }
 
             _desc = "某个终端客户删除某些联系人，从所有联系人、联系人分组中一并删除，批量操作";
-            _procName = "Addr_SP_Contactor_DelFromAllContactors";
+            _procName = "UP_Addr_Contactor_DelFromAllContactors";
             _methodName = MethodBase.GetCurrentMethod().Name;
 
             _log = new LogBuilder
@@ -226,7 +226,7 @@ namespace SMS.SQLServerDAL.Addr
                 return rs;
             }
             _desc = "某个终端客户删除某些联系人，从联系人分组中删除，批量操作";
-            _procName = "Addr_SP_Contactor_DelFromSingleCGroup";
+            _procName = "UP_Addr_Contactor_DelFromSingleCGroup";
             _methodName = MethodBase.GetCurrentMethod().Name;
 
             _log = new LogBuilder
@@ -289,7 +289,7 @@ namespace SMS.SQLServerDAL.Addr
             }
 
             _desc = "获取某个终端客户的某个联系人详细信息，含姓名、联系方式、所在分组。";
-            _procName = "Addr_SP_Contactor_GetSingleFullInfo_V2";
+            _procName = "UP_Addr_Contactor_GetSingleFullInfo";
             _methodName = MethodBase.GetCurrentMethod().Name;
 
             _log = new LogBuilder
@@ -408,7 +408,7 @@ namespace SMS.SQLServerDAL.Addr
 
 
             _desc = "更新单个联系人与多个联系组之间的所属关系(加入到组或从组中退出)";
-            _procName = "Addr_SP_Contactor_AddSingleToCGroups_V2";
+            _procName = "UP_Addr_Contactor_AddSingleToCGroups";
             _methodName = MethodBase.GetCurrentMethod().Name;
 
             _log = new LogBuilder
@@ -488,7 +488,7 @@ namespace SMS.SQLServerDAL.Addr
             }
 
             _desc = "某个终端客户修改某个联系人的姓名";
-            _procName = "Addr_SP_SetName";
+            _procName = "UP_Addr_Contactor_SetName";
             _methodName = MethodBase.GetCurrentMethod().Name;
 
             _log = new LogBuilder
@@ -557,7 +557,7 @@ namespace SMS.SQLServerDAL.Addr
             }
 
             _desc = "某个终端客户设置（修改）某个联系人的某个联系方式";
-            _procName = "Addr_SP_Contactor_AddMutilField";
+            _procName = "UP_Addr_Contactor_AddMutilField";
             _methodName = MethodBase.GetCurrentMethod().Name;
 
             _log = new LogBuilder
@@ -621,61 +621,7 @@ namespace SMS.SQLServerDAL.Addr
             return rs;
         }
 
-        public BaseResult ContactWaySync(int userId, int compId)
-        {
-            var rs = new BaseResult { State = false, Value = -1, Desc = "数据操作层初始化" };
-            if (userId <= 0)
-            {
-                rs.Failed(-101, "userId无效");
-                return rs;
-            }
-
-            _desc = "3.0向4.0通讯录的同步";
-            _procName = "UP_Addr_ContactorWaySync";
-            _methodName = MethodBase.GetCurrentMethod().Name;
-
-            _log = new LogBuilder
-            {
-                Method = string.Format("类[{0}]方法[{1}]", ClassName, _methodName),
-                Desc = _desc,
-                Database = _databaseName,
-                StroreProcedure = _procName
-            };
-            _log.Append("userId", userId);
-
-
-            try
-            {
-                SqlParameter[] parameters =
-                    {
-                        _addrDatabase.MakeInParam("@userId", SqlDbType.BigInt, 4, userId),
-                        _addrDatabase.MakeInParam("@CompID", SqlDbType.NVarChar, 20, compId)
-                    };
-
-                _addrDatabase.ExecuteProc(_procName, parameters, out _result);
-
-                if (_result != 0)
-                {
-                    rs.Failed(-2, "todo");
-                    return rs;
-                }
-            }
-            catch (Exception ex)
-            {
-                rs.Failed(-1, ex.ToString());
-
-                _log.Exception = string.Format("{0},发生异常：{1}", _desc, ex.Message);
-                _log.Error();
-
-                return rs;
-            }
-            finally
-            {
-                _addrDatabase.Close();//仅显式关闭链接，不做其它操作
-            }
-            rs.Success();
-            return rs;
-        }
+   
         
     }
 }

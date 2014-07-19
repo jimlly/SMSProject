@@ -8,7 +8,7 @@ namespace Public.DB
     public enum DBSource
     {
         /// <summary>
-        /// Yuantel中心数据库
+        /// 中心数据库
         /// </summary>
         DBYuantel = 0,
         /// <summary>

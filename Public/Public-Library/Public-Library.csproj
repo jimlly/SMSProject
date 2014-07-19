@@ -67,7 +67,6 @@
     <Compile Include="Common\HtmlPager.cs" />
     <Compile Include="Common\HttpProc.cs" />
     <Compile Include="Common\INIFile.cs" />
-    <Compile Include="Common\MailPoper.cs" />
     <Compile Include="Common\MailSender.cs" />
     <Compile Include="Common\MessageBox.cs" />
     <Compile Include="Common\ObjectExtion.cs" />

@@ -2,6 +2,11 @@
 using System.Text;
 using System.Data.OleDb;
 using System.Data;
+using Public.Log;
+using System.Collections;
+using System.Globalization;
+using System.Data.Odbc;
+using System.IO;
 
 #region -   Copyright信息  -
 //********************************************************************************************************
@@ -633,5 +638,242 @@ namespace Public.Helper
             }
         }
         #endregion
+
+
+        private FunctionLogBuilder _log = new FunctionLogBuilder();
+        /// <summary>
+        /// Excel 版本号
+        /// </summary>
+        private const string ExcelDefaultVersion = "12.0";
+        /// <summary>
+        /// 连接字符串模板
+        /// </summary>
+        private const string ConnectionStringTemplate = "Provider = Microsoft.ACE.OLEDB.12.0; Data Source ={0};Extended Properties=Excel {1}";
+        /// <summary>
+        /// 返回Excel数据源
+        /// </summary>
+        /// <param name="filename">文件路径</param>
+        /// <returns></returns>
+        static public DataSet ExcelToDataSet(string filename)
+        {
+            try
+            {
+                DataSet ds = new DataSet(); ;
+
+                OleDbConnection myConn = new OleDbConnection(string.Format(CultureInfo.InvariantCulture, ConnectionStringTemplate, filename, ExcelDefaultVersion));
+                myConn.Open();
+                ArrayList arr = GetSheetNames(myConn);
+
+                DataTable dt = null;
+                if (arr.Count > 0)
+                {
+                    foreach (string sheet in arr)
+                    {
+                        dt = new DataTable();
+                        dt = QueryBySheetName(myConn, sheet);
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            ds.Tables.Add(dt);
+                        }
+                    }
+                }
+
+                myConn.Close();
+                return ds;
+            }
+            catch (Exception)
+            {
+                //LogHelper.Error("返回Excel数据源:" + ex.Message);
+                //MyLog.logger.Error("返回Excel数据源:" + ex.Message);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 获取所有的Sheet名
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <returns></returns>
+        private static ArrayList GetSheetNames(OleDbConnection conn)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                    conn.Open();
+                DataTable dt = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                ArrayList arrSheets = new ArrayList();
+                foreach (DataRow row in dt.Rows)
+                {
+                    arrSheets.Add(row[2]);
+                }
+                return arrSheets;
+            }
+            catch (Exception)
+            {
+                //LogHelper.Error(" 获取所有的Sheet名:" + ex.Message);
+                //MyLog.logger.Error(" 获取所有的Sheet名:" + ex.Message);
+            }
+            return null;
+        }
+        /// <summary>
+        /// 根据Sheet的名获取数据。
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <param name="sheetName"></param>
+        /// <returns></returns>
+        private static DataTable QueryBySheetName(OleDbConnection conn, string sheetName)
+        {
+            try
+            {
+                string cmd = "select * from [" + sheetName + "]";
+                OleDbDataAdapter adapter = new OleDbDataAdapter(cmd, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
+            catch (Exception)
+            {
+                //LogHelper.Error("根据Sheet的名获取数据:" + ex.Message);
+                //MyLog.logger.Error("根据Sheet的名获取数据:" + ex.Message);
+            }
+
+            return null;
+        }
+
+        //读取CSV文件数据集
+        public static DataSet OdbcFromCSV(string filePath, string fileName)
+        {
+            string strConn = "Driver={Microsoft Text Driver (*.txt; *.csv)};Dbq=";
+            strConn += filePath;
+            strConn += ";Extensions=csv,txt;HDR=No;";
+            OdbcConnection objConn = new OdbcConnection(strConn);
+            DataSet dsCSV = new DataSet();
+            try
+            {
+                string strSql = "select * from " + fileName;
+                OdbcDataAdapter odbcCSVDataAdapter = new OdbcDataAdapter(strSql, objConn);
+                odbcCSVDataAdapter.Fill(dsCSV);
+                return dsCSV;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// 根据DataTable生成Excel
+        /// </summary>
+        /// <param name="dataTable">数据源</param>
+        /// <param name="fileName">要保存的路径</param>
+        /// <param name="fileName">要保存的路径</param>
+        /// <param name=" rowsCount ">当一个工作表最多的行数rowsCount，当超过时，则新建工作表。</param>
+        /// <returns>生成成功则返回True，否则返回False</returns>
+        public static bool DataTable2Excel(DataTable dataTable, string filePath, string fileName, int rowsCount, string formatPath)
+        {
+            bool rt = false;//用于返回值
+            if (dataTable == null && rowsCount < 1)
+            {
+                //LogHelper.Info("DataTable2Excel:datatable is null or rowscount<1");
+                return false;
+            }
+            int rowNum = dataTable.Rows.Count;//获取行数
+            int colNum = dataTable.Columns.Count;//获取列数
+            int SheetNum = (rowNum - 1) / rowsCount + 1; //获取工作表数
+            string sqlText = "";//带类型的列名
+            string sqlValues = "";//值
+            string colCaption = "";//列名
+            //string formatPath =ConfigurationManager.AppSettings["FormatPath"].ToString();
+            //LogHelper.Info("DataTable2Excel:formatPath=" + formatPath + ",rowNum=" + rowNum + ",colNum=" + colNum + ",sheetNum=" + SheetNum);
+            try
+            {
+                for (int i = 0; i < colNum; i++)
+                {
+                    if (i != 0)
+                    {
+                        sqlText += " , ";
+                        colCaption += " , ";
+                    }
+                    sqlText += "[" + dataTable.Columns[i].Caption.ToString() + "] VarChar";//生成带VarChar列的标题
+                    colCaption += "[" + dataTable.Columns[i].Caption.ToString() + "]";//生成列的标题
+                }
+                //LogHelper.Info("DataTable2Excel:Sqltext=" + sqlText + ",colCaption=" + colCaption);
+            }
+            catch (Exception)
+            {
+                //MyLog.logger.Error("根据DataTable生成Excel:" + ex.Message);
+            }
+
+            string connstring = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + filePath + fileName + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=2'";
+            // OleDbConnection cn = new OleDbConnection(string.Format(CultureInfo.InvariantCulture, ConnectionStringTemplate, fileName, ExcelDefaultVersion + ";HDR=Yes;IMEX=0"));
+            OleDbConnection cn = new OleDbConnection(connstring);
+            try
+            {
+                //判断文件是否存在,存在则先删除
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+                if (File.Exists(filePath + fileName))
+                {
+                    File.Delete(filePath + fileName);
+
+                }
+                else
+                {
+                    File.Copy(formatPath, filePath + fileName);
+                }
+                int sheet = 1;//表数
+                int dbRow = 0;//数据的行数
+                //打开连接
+                //LogHelper.Info("打开连接");
+                cn.Open();
+                while (sheet <= SheetNum)
+                {
+                    //string sqlCreate = "CREATE TABLE [sheet1] (" + sqlText + ")";
+                    //OleDbCommand cmd = new OleDbCommand(sqlCreate, cn);
+                    //创建Excel文件
+                    OleDbCommand cmd = new OleDbCommand();
+                    cmd.Connection = cn;
+                    for (int srow = 0; srow < rowsCount; srow++)
+                    {
+                        sqlValues = "";
+                        for (int col = 0; col < colNum; col++)
+                        {
+                            if (col != 0)
+                            {
+                                sqlValues += " , ";
+                            }
+                            sqlValues += "'" + dataTable.Rows[dbRow][col].ToString() + "'";//拼接Value语句
+                        }
+                        //LogHelper.Info("DataTable2Excel:sqlValues=" + sqlValues);
+                        String queryString = "INSERT INTO [Sheet1$] (" + colCaption + ") VALUES (" + sqlValues + ")";
+                        //LogHelper.Info("DataTable2Excel:queryString=" + queryString);
+                        cmd.CommandText = queryString;
+                        //LogHelper.Info("插入数据");
+                        cmd.ExecuteNonQuery();//插入数据
+                        dbRow++;//目前数据的行数自增
+                        if (dbRow >= rowNum)
+                        {
+                            //目前数据的行数等于rowNum时退出循环
+                            break;
+                        }
+                    }
+                    sheet++;
+                }
+                rt = true;
+            }
+            catch (Exception)
+            {
+                //MyLog.logger.Error("根据DataTable生成Excel:" + ex.Message);
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            return rt;
+
+        }
     }
 }

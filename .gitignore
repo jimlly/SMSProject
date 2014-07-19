@@ -34,7 +34,7 @@ Icon
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
-
-bin
+SMSWeb/bin/
+bin/
 *.suo
 obj

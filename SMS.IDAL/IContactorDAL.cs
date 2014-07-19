@@ -14,6 +14,6 @@ namespace SMS.IDAL
         BaseResult SetContactorGroups(int userId, List<ContactorGroup> groups, int contactorID, int compId);
         BaseResult SetName(int userId, int contactorID, string name, int compId);
         BaseResult SetContactWay(int userId, int contactorID, List<ContactWay> cWay, int compId, string confParticipatePhoneNo);
-        BaseResult ContactWaySync(int userId, int compId);
+   
     }
 }
