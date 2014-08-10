@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2005                    */
-/* Created on:     2014/7/19 21:36:29                           */
+/* Created on:     2014/8/9 14:40:35                            */
 /*==============================================================*/
 
 
@@ -202,6 +202,13 @@ go
 
 if exists (select 1
             from  sysobjects
+           where  id = object_id('SMS_TB_MsgType_Config')
+            and   type = 'U')
+   drop table SMS_TB_MsgType_Config
+go
+
+if exists (select 1
+            from  sysobjects
            where  id = object_id('SMS_TB_SM_Company')
             and   type = 'U')
    drop table SMS_TB_SM_Company
@@ -351,6 +358,14 @@ create table SMS_IB_SM_Account (
 go
 
 /*==============================================================*/
+/* Table: SMS_TB_MsgType_Config                                 */
+/*==============================================================*/
+create table SMS_TB_MsgType_Config (
+   ID                   int                  null
+)
+go
+
+/*==============================================================*/
 /* Table: SMS_TB_SM_Company                                     */
 /*==============================================================*/
 create table SMS_TB_SM_Company (
@@ -480,7 +495,7 @@ SELECT     A.ContactorID, A.UserID, A.CompID, A.Name, A.JobPhone, A.JobFax, A.Mo
                       B.Dept, B.Business, B.Email, B.Url, B.Remark, A.DefaultWayID, C.SysID, C.Field
 FROM         dbo.Addr_TB_Contactor AS A WITH (NOLOCK) LEFT OUTER JOIN
                       dbo.Addr_TB_ContactorDetail AS B WITH (NOLOCK) ON A.ContactorID = B.ContactorID LEFT OUTER JOIN
-                      dbo.Addr_TB_ContactField AS C WITH (NOLOCK) ON A.DefConfPhoneIdx = C.SysID
+                      dbo.Addr_TB_ContactField AS C WITH (NOLOCK) ON A.DefaultWayID = C.SysID
 go
 
 /*==============================================================*/
@@ -542,6 +557,7 @@ Create Procedure [dbo].[UP_Addr_ContactGroup_CreateSingleCGroup]
 @ContactorGroupID int output,
 @Remark nvarchar(1024)
 As
+Begin
 	IF @UserID<=0 OR @GroupName='' RETURN 0;
 
 	--如果存在同名的未删除的组，则不允许再生成一个同名的组
@@ -577,6 +593,7 @@ As
 	IF @@Rowcount >0
 		Set @ContactorGroupID = @@Identity
 	Return 1
+End
 go
 
 
@@ -694,7 +711,7 @@ go
 		#3.2014-04-01，分页+重命名，原存储过程Addr_SP_ContactGroup_GetCGroupsListPage_V2
 		exec UP_Addr_ContactorGroupManager_GetCGroupsListPage 254941,254940,0,1,100,'1'
 =============================================================*/
-ALTER PROCEDURE [dbo].[UP_Addr_ContactorGroupManager_GetCGroupsListPage]
+Create PROCEDURE [dbo].[UP_Addr_ContactorGroupManager_GetCGroupsListPage]
 	@UserID INT,  
 	@CompID INT,--个人用户 CompID = 0,查找条件中，@CompID必须加上，用于过滤非法数据
 	@SharedFlag TINYINT,--共享标识 0 – 所有的（默认）1 – 非共享联系组2 – 自己共享联系组3 – 他人共享联系组 4 - 不包含他人共享的联系组（含自己共享的，自己非共享的）  
@@ -702,6 +719,7 @@ ALTER PROCEDURE [dbo].[UP_Addr_ContactorGroupManager_GetCGroupsListPage]
     @PageSize INT,
 	@SearchGroup NVARCHAR(200) 
 AS
+Begin
 SET NOCOUNT ON
 
 DECLARE
@@ -834,6 +852,7 @@ EXEC sp_executesql
 	@startRowIndex = @startRowIndex,
     @endRowIndex = @endRowIndex,
 	@SearchGroup=@SearchGroup
+End
 go
 
 
@@ -878,6 +897,7 @@ Create PROC [dbo].[UP_Addr_ContactorGroupManager_GetContactorsList]
 	@PageSize INT,
 	@SearchContent VARCHAR(200)
 AS
+Begin
 SET NOCOUNT ON
 
 IF @UserID <= 0
@@ -1008,6 +1028,7 @@ EXEC sp_executesql
 	@SearchContent=@SearchContent
 
 RETURN 1;
+End
 go
 
 
@@ -1049,7 +1070,8 @@ Create PROC [dbo].[UP_Addr_ContactorGroupManager_GetUnGroupedContactors]
     @PageIndex INT ,
     @PageSize INT ,
     @SearchContent VARCHAR(200)
-AS 
+AS
+Begin
     SET NOCOUNT ON
 
     IF @UserID <= 0 
@@ -1191,6 +1213,7 @@ AS
         @endRowIndex = @endRowIndex, @SearchContent = @SearchContent
 
     RETURN 1;
+End
 go
 
 
@@ -1353,6 +1376,7 @@ Create PROC [dbo].[UP_Addr_ContactorGroupManager_GetUserGroupContactors]
 	@PageSize INT,
 	@SearchContent VARCHAR(200)
 AS
+Begin
 SET NOCOUNT ON
 
 IF @UserID <= 0
@@ -1488,6 +1512,68 @@ EXEC sp_executesql
 	@SearchContent=@SearchContent
 
 RETURN 1;
+End
+go
+
+
+
+/*=============================================================
+
+对象名称: UP_Addr_Contactor_SetMutilField
+功能描述: 批量添加联系人联系方式
+测试参数: EXEC UP_Addr_Contactor_SetMutilField
+创 建 人: lj,2014-07-19
+修改记录: 
+=============================================================*/
+Create PROCEDURE [dbo].[UP_Addr_Contactor_SetMutilField]
+    @UserID INT ,
+    @CompID INT ,
+    @ContactorID BIGINT ,
+    @ContactWay XML ,
+    @ConfParticipatePhoneNo VARCHAR(50)
+AS 
+Begin
+    SET NOCOUNT ON
+/*
+<ContactWay>
+	<Way>
+		<WayType>1</WayType>
+		<WayField>13810712519</WayField>
+	</Way>
+	<Way>
+		<WayType>3</WayType>
+		<WayField>346425159@qq.com</WayField>
+	</Way>
+</ContactWay>
+*/
+    DELETE  dbo.Addr_TB_ContactField
+    WHERE   UserID = @UserID
+            AND CompID = @CompID
+            AND ContactorID = @ContactorID
+
+    INSERT  INTO dbo.Addr_TB_ContactField
+            ( ContactorID ,
+              UserID ,
+              CompID ,
+              Field ,
+              FieldType
+            )
+            SELECT  @ContactorID ,
+                    @UserID ,
+                    @CompID ,
+                    Field = T.c.value('(./WayField/text())1', 'VARCHAR(200)') ,
+                    FieldType = T.c.value('(./WayType/text())1', 'INT')
+            FROM    @ContactWay.nodes('/ContactWay/Way') AS T ( c )
+
+	--更新参会号码
+    UPDATE  dbo.Addr_TB_Contactor
+    SET     DefaultWayID = ( SELECT  SysID
+                                FROM    dbo.Addr_TB_ContactField
+                                WHERE   ContactorID = @ContactorID
+                                        AND Field = @ConfParticipatePhoneNo
+                              )
+    WHERE   ContactorID = @ContactorID
+End
 go
 
 
@@ -1506,7 +1592,8 @@ Create PROCEDURE [dbo].[UP_Addr_Contactor_AddContactor]
     @ContactWay XML,
     @ContactGroup XML,
 	@ConfParticipatePhoneNo VARCHAR(50)
-AS 
+AS
+Begin
 SET NOCOUNT ON;
 /*
 <ContactWay>
@@ -1582,7 +1669,7 @@ INSERT INTO dbo.Addr_TB_ContactorDetail
 	Url,
 	ZipCode,
 	Remark,
-	CreatedTime,
+	CreateTime,
 	LastModifyTime
 )
 VALUES  
@@ -1637,6 +1724,7 @@ EXEC UP_Addr_Contactor_SetMutilField
 	@contactorId,
     @ContactWay,
 	@ConfParticipatePhoneNo
+ End
 go
 
 
@@ -1648,12 +1736,13 @@ go
 创 建 人: 
 修改记录: 
 =============================================================*/
-ALTER PROCEDURE [dbo].[Addr_SP_Contactor_AddMultiContactorToMultiGroup]
+Create PROCEDURE [dbo].[Addr_SP_Contactor_AddMultiContactorToMultiGroup]
 	@CompID INT,
 	@UserID INT,
 	@ContactorList XML,
 	@GroupList XML
 AS
+Begin
 SET NOCOUNT ON
 /*
 <ContactGroup>
@@ -1841,6 +1930,7 @@ FROM dbo.Addr_TB_ContactGroup A
 	) B
 		ON A.ContactGroupID = B.ContactGroupID
 WHERE A.UserID = @UserID
+End
 go
 
 
@@ -1857,7 +1947,8 @@ Create PROCEDURE [dbo].[UP_Addr_Contactor_AddMutilField]
     @ContactorID BIGINT ,
     @ContactWay XML ,
     @ConfParticipatePhoneNo VARCHAR(50)
-AS 
+AS
+Begin
     SET NOCOUNT ON
 /*
 <ContactWay>
@@ -1898,6 +1989,7 @@ AS
                                         AND Field = @ConfParticipatePhoneNo
                               )
     WHERE   ContactorID = @ContactorID
+End
 go
 
 
@@ -1916,6 +2008,7 @@ Create PROCEDURE [dbo].[UP_Addr_Contactor_AddSingleToCGroups]
 	@ContactorID INT, --联系人ID
 	@ContactorGroupIDList XML	--组列表
 AS
+Begin
 SET NOCOUNT ON
 /*
 <ContactGroup>
@@ -2054,6 +2147,7 @@ FROM dbo.Addr_TB_ContactGroup A
 	INNER JOIN @tempGroupList B
 		ON A.ContactGroupID = B.ContactGroupID
 WHERE A.UserID = @UserID
+End
 go
 
 
@@ -2069,7 +2163,7 @@ go
 
 修改内容：
 */
-ALTER Procedure [dbo].[UP_Addr_Contactor_DelFromAllContactors]
+Create Procedure [dbo].[UP_Addr_Contactor_DelFromAllContactors]
 @UserID INT, --用户编号
 @ContactorIDList VARCHAR(256),--每次最多删除10个联系人，应在页面上控制，暂不提供删除所有的操作
 @Result INT OUTPUT
@@ -2092,7 +2186,7 @@ Begin
 	Declare @TempContactorIDs Table ( ContactorID Int )--保存实际删除的ContactorID
 	--1.0 更新联系人主表[Addr_TB_Contactor].[DeleteMark]
 	Update a
-	Set a.[DeleteMark] = 1,a.UpdatedDate=GETDATE()
+	Set a.[DeleteMark] = 1,a.LastModifyTime=GETDATE()
 	OUTPUT INSERTED.ContactorID
 	INTO @TempContactorIDs
 	From [Addr_TB_Contactor] a RIGHT JOIN @Temp b
@@ -2261,7 +2355,8 @@ go
 =============================================================*/
 Create PROCEDURE [dbo].[UP_Addr_Contactor_GetSingleFullInfo] 
 @ContactorID INT --联系人ID  
-AS 
+AS
+Begin 
     SET NOCOUNT ON
 
 --联系人信息
@@ -2318,65 +2413,7 @@ AS
     WHERE   A.ContactorID = @ContactorID
             AND A.DeleteMark = 0
             AND b.DeleteMark = 0
-go
-
-
-
-/*=============================================================
-
-对象名称: UP_Addr_Contactor_SetMutilField
-功能描述: 批量添加联系人联系方式
-测试参数: EXEC UP_Addr_Contactor_SetMutilField
-创 建 人: lj,2014-07-19
-修改记录: 
-=============================================================*/
-ALTER PROCEDURE [dbo].[UP_Addr_Contactor_SetMutilField]
-    @UserID INT ,
-    @CompID INT ,
-    @ContactorID BIGINT ,
-    @ContactWay XML ,
-    @ConfParticipatePhoneNo VARCHAR(50)
-AS 
-    SET NOCOUNT ON
-/*
-<ContactWay>
-	<Way>
-		<WayType>1</WayType>
-		<WayField>13810712519</WayField>
-	</Way>
-	<Way>
-		<WayType>3</WayType>
-		<WayField>346425159@qq.com</WayField>
-	</Way>
-</ContactWay>
-*/
-    DELETE  dbo.Addr_TB_ContactField
-    WHERE   UserID = @UserID
-            AND CompID = @CompID
-            AND ContactorID = @ContactorID
-
-    INSERT  INTO dbo.Addr_TB_ContactField
-            ( ContactorID ,
-              UserID ,
-              CompID ,
-              Field ,
-              FieldType
-            )
-            SELECT  @ContactorID ,
-                    @UserID ,
-                    @CompID ,
-                    Field = T.c.value('(./WayField/text())1', 'VARCHAR(200)') ,
-                    FieldType = T.c.value('(./WayType/text())1', 'INT')
-            FROM    @ContactWay.nodes('/ContactWay/Way') AS T ( c )
-
-	--更新参会号码
-    UPDATE  dbo.Addr_TB_Contactor
-    SET     DefaultWayID = ( SELECT  SysID
-                                FROM    dbo.Addr_TB_ContactField
-                                WHERE   ContactorID = @ContactorID
-                                        AND Field = @ConfParticipatePhoneNo
-                              )
-    WHERE   ContactorID = @ContactorID
+End
 go
 
 
@@ -2391,9 +2428,11 @@ Create PROCEDURE [dbo].[UP_Addr_Contactor_SetName]
     @ContactorID BIGINT ,
     @ContactorName NVARCHAR(20)
 AS 
+Begin
     SET NOCOUNT ON;
     UPDATE  dbo.Addr_TB_Contactor
     SET     Name = @ContactorName
     WHERE   ContactorID = @ContactorID
+End
 go
 

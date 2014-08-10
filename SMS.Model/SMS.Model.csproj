@@ -52,6 +52,7 @@
     <Compile Include="Result\ResultContactorDetail.cs" />
     <Compile Include="Result\ResultContactorGroupList.cs" />
     <Compile Include="Result\ResultContactorList.cs" />
+    <Compile Include="SmsInfo.cs" />
     <Compile Include="XmlContactWay.cs" />
   </ItemGroup>
   <ItemGroup>

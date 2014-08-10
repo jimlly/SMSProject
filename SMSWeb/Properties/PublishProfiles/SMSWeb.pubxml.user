@@ -1,0 +1,1079 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
+    <LastUsedPlatform>Any CPU</LastUsedPlatform>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Areas/Addr/Views/Contactor/Edit.cshtml">
+      <publishTime>07/05/2014 17:48:22</publishTime>
+    </File>
+    <File Include="Areas/Addr/Views/Contactor/Index.cshtml">
+      <publishTime>07/13/2014 13:29:15</publishTime>
+    </File>
+    <File Include="Areas/Addr/Views/Web.config">
+      <publishTime>06/29/2014 17:50:00</publishTime>
+    </File>
+    <File Include="Assets/avatars/avatar.png">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/avatars/avatar1.png">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/avatars/avatar2.png">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/avatars/avatar3.png">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/avatars/avatar4.png">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/avatars/avatar5.png">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/avatars/profile-pic.jpg">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/avatars/user.jpg">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/ace-ie.min.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/ace-rtl.min.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/ace-skins.min.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/ace.min.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/bootstrap-editable.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/bootstrap-timepicker.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/bootstrap.min.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/chosen.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/colorbox.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/colorpicker.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/datepicker.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/daterangepicker.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/dropzone.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/font-awesome-ie7.min.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/font-awesome.min.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/fullcalendar.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/images/loading.gif">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Blue/Desktop.ini">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Blue/images/jbox-button1.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Blue/images/jbox-button2.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Blue/images/jbox-close1.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Blue/images/jbox-close2.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Blue/images/jbox-content-loading.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Blue/images/jbox-icons-ie6.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Blue/images/jbox-icons.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Blue/images/jbox-loading1.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Blue/images/jbox-loading2.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Blue/images/jbox-loading3.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Blue/images/jbox-title-icon.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Blue/images/OneNote 目录.onetoc2">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Blue/jbox.css">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Blue/OneNote 目录.onetoc2">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Bootstrap/images/jbox-button1.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Bootstrap/images/jbox-button2.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Bootstrap/images/jbox-close1.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Bootstrap/images/jbox-close2.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Bootstrap/images/jbox-content-loading.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Bootstrap/images/jbox-icons-ie6.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Bootstrap/images/jbox-icons.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Bootstrap/images/jbox-loading1.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Bootstrap/images/jbox-loading2.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Bootstrap/images/jbox-loading3.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Bootstrap/images/jbox-title-icon.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Bootstrap/images/OneNote 目录.onetoc2">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Bootstrap/jbox.css">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Bootstrap/jbox2.css">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Brown/Desktop.ini">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Brown/images/jbox-button1.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Brown/images/jbox-button2.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Brown/images/jbox-close1.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Brown/images/jbox-close2.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Brown/images/jbox-content-loading.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Brown/images/jbox-icons-ie6.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Brown/images/jbox-icons.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Brown/images/jbox-loading1.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Brown/images/jbox-loading2.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Brown/images/jbox-loading3.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Brown/images/jbox-title-icon.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Brown/jbox.css">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Default/Desktop.ini">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Default/images/jbox-button1.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Default/images/jbox-button2.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Default/images/jbox-close1.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Default/images/jbox-close2.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Default/images/jbox-content-loading.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Default/images/jbox-icons-ie6.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Default/images/jbox-icons.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Default/images/jbox-loading1.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Default/images/jbox-loading2.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Default/images/jbox-loading3.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Default/images/jbox-title-icon.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Default/jbox.css">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Gray/Desktop.ini">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Gray/images/jbox-button1.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Gray/images/jbox-button2.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Gray/images/jbox-close1.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Gray/images/jbox-close2.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Gray/images/jbox-content-loading.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Gray/images/jbox-icons-ie6.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Gray/images/jbox-icons.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Gray/images/jbox-loading1.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Gray/images/jbox-loading2.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Gray/images/jbox-loading3.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Gray/images/jbox-title-icon.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Gray/jbox.css">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GrayCool/Desktop.ini">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GrayCool/images/jbox-button1.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GrayCool/images/jbox-button2.png">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GrayCool/images/jbox-close1.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GrayCool/images/jbox-close2.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GrayCool/images/jbox-content-loading.gif">
+      <publishTime>07/04/2014 20:20:26</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GrayCool/images/jbox-icons-ie6.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GrayCool/images/jbox-icons.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GrayCool/images/jbox-loading1.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GrayCool/images/jbox-loading2.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GrayCool/images/jbox-loading3.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GrayCool/images/jbox-title-icon.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GrayCool/jbox.css">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Green/Desktop.ini">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Green/images/jbox-button1.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Green/images/jbox-button2.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Green/images/jbox-close1.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Green/images/jbox-close2.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Green/images/jbox-content-loading.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Green/images/jbox-icons-ie6.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Green/images/jbox-icons.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Green/images/jbox-loading1.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Green/images/jbox-loading2.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Green/images/jbox-loading3.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Green/images/jbox-title-icon.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Green/jbox.css">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GreyBlue/Desktop.ini">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GreyBlue/images/jbox-button1.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GreyBlue/images/jbox-button2.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GreyBlue/images/jbox-close1.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GreyBlue/images/jbox-close2.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GreyBlue/images/jbox-content-loading.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GreyBlue/images/jbox-icons-ie6.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GreyBlue/images/jbox-icons.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GreyBlue/images/jbox-loading1.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GreyBlue/images/jbox-loading2.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GreyBlue/images/jbox-loading3.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GreyBlue/images/jbox-title-icon.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/GreyBlue/jbox.css">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Purple/Desktop.ini">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Purple/images/jbox-button1.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Purple/images/jbox-button2.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Purple/images/jbox-close1.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Purple/images/jbox-close2.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Purple/images/jbox-content-loading.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Purple/images/jbox-icons-ie6.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Purple/images/jbox-icons.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Purple/images/jbox-loading1.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Purple/images/jbox-loading2.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Purple/images/jbox-loading3.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Purple/images/jbox-title-icon.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Purple/jbox.css">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Red/Desktop.ini">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Red/images/jbox-button1.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Red/images/jbox-button2.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Red/images/jbox-close1.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Red/images/jbox-close2.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Red/images/jbox-content-loading.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Red/images/jbox-icons-ie6.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Red/images/jbox-icons.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Red/images/jbox-loading1.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Red/images/jbox-loading2.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Red/images/jbox-loading3.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Red/images/jbox-title-icon.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/Red/jbox.css">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBlue/Desktop.ini">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBlue/images/jbox-button1.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBlue/images/jbox-button2.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBlue/images/jbox-close1.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBlue/images/jbox-close2.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBlue/images/jbox-content-loading.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBlue/images/jbox-icons-ie6.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBlue/images/jbox-icons.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBlue/images/jbox-loading1.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBlue/images/jbox-loading2.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBlue/images/jbox-loading3.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBlue/images/jbox-title-icon.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBlue/jbox.css">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBrown/Desktop.ini">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBrown/images/jbox-button1.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBrown/images/jbox-button2.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBrown/images/jbox-close1.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBrown/images/jbox-close2.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBrown/images/jbox-content-loading.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBrown/images/jbox-icons-ie6.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBrown/images/jbox-icons.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBrown/images/jbox-loading1.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBrown/images/jbox-loading2.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBrown/images/jbox-loading3.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBrown/images/jbox-title-icon.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareBrown/jbox.css">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareGreen/Desktop.ini">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareGreen/images/jbox-button1.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareGreen/images/jbox-button2.png">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareGreen/images/jbox-close1.gif">
+      <publishTime>07/04/2014 20:20:27</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareGreen/images/jbox-close2.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareGreen/images/jbox-content-loading.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareGreen/images/jbox-icons-ie6.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareGreen/images/jbox-icons.png">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareGreen/images/jbox-loading1.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareGreen/images/jbox-loading2.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareGreen/images/jbox-loading3.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareGreen/images/jbox-title-icon.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareGreen/jbox.css">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/SharePurple/Desktop.ini">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/SharePurple/images/jbox-button1.png">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/SharePurple/images/jbox-button2.png">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/SharePurple/images/jbox-close1.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/SharePurple/images/jbox-close2.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/SharePurple/images/jbox-content-loading.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/SharePurple/images/jbox-icons-ie6.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/SharePurple/images/jbox-icons.png">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/SharePurple/images/jbox-loading1.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/SharePurple/images/jbox-loading2.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/SharePurple/images/jbox-loading3.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/SharePurple/images/jbox-title-icon.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/SharePurple/jbox.css">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareRed/Desktop.ini">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareRed/images/jbox-button1.png">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareRed/images/jbox-button2.png">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareRed/images/jbox-close1.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareRed/images/jbox-close2.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareRed/images/jbox-content-loading.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareRed/images/jbox-icons-ie6.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareRed/images/jbox-icons.png">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareRed/images/jbox-loading1.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareRed/images/jbox-loading2.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareRed/images/jbox-loading3.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareRed/images/jbox-title-icon.gif">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/ShareRed/jbox.css">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jBoxSkins/样式说明%28以Default皮肤为例%29.css">
+      <publishTime>07/04/2014 20:20:28</publishTime>
+    </File>
+    <File Include="Assets/css/jquery-ui-1.10.3.custom.min.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/jquery-ui-1.10.3.full.min.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/jquery.gritter.css">
+      <publishTime>06/28/2014 16:20:24</publishTime>
+    </File>
+    <File Include="Assets/css/jquery.mCustomScrollbar.css">
+      <publishTime>07/04/2014 21:17:06</publishTime>
+    </File>
+    <File Include="Assets/css/pagination.css">
+      <publishTime>07/04/2014 20:36:25</publishTime>
+    </File>
+    <File Include="Assets/css/select2.css">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/css/style.css">
+      <publishTime>07/04/2014 20:36:25</publishTime>
+    </File>
+    <File Include="Assets/css/ui.jqgrid.css">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/font/fontawesome-webfont.woff">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/images/gallery/image-1.jpg">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/images/gallery/image-2.jpg">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/images/gallery/image-3.jpg">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/images/gallery/image-4.jpg">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/images/gallery/image-5.jpg">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/images/gallery/image-6.jpg">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/images/gallery/thumb-1.jpg">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/images/gallery/thumb-2.jpg">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/images/gallery/thumb-3.jpg">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/images/gallery/thumb-4.jpg">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/images/gallery/thumb-5.jpg">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/images/gallery/thumb-6.jpg">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/ace-elements.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/ace-extra.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/ace.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/additional-methods.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/AddrManage.js">
+      <publishTime>07/05/2014 15:46:04</publishTime>
+    </File>
+    <File Include="Assets/js/bootbox.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/bootstrap-colorpicker.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/bootstrap-tag.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/bootstrap-wysiwyg.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/bootstrap.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/chosen.jquery.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/date-time/bootstrap-datepicker.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/date-time/bootstrap-timepicker.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/date-time/daterangepicker.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/date-time/moment.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/dropzone.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/EditAddress.js">
+      <publishTime>07/05/2014 17:14:21</publishTime>
+    </File>
+    <File Include="Assets/js/excanvas.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/flot/jquery.flot.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/flot/jquery.flot.pie.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/flot/jquery.flot.resize.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/fuelux/data/fuelux.tree-sampledata.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/fuelux/fuelux.spinner.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/fuelux/fuelux.tree.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/fuelux/fuelux.wizard.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/fullcalendar.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/html5shiv.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jqGrid/i18n/grid.locale-en.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jqGrid/jquery.jqGrid.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery-1.10.2.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery-2.0.3.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery-ui-1.10.3.custom.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery-ui-1.10.3.full.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.autosize.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.colorbox-min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.dataTables-1.10.min.js">
+      <publishTime>07/13/2014 15:29:17</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.dataTables.bootstrap.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.dataTables.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.easy-pie-chart.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.gritter.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.hotkeys.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.inputlimiter.1.3.1.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.jBox-2.3.min.js">
+      <publishTime>07/04/2014 20:24:07</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.jBox-zh-CN.js">
+      <publishTime>07/04/2014 20:58:37</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.jBox.js">
+      <publishTime>07/04/2014 20:24:07</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.json-2.4.js">
+      <publishTime>07/04/2014 20:24:07</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.knob.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.maskedinput.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.mCustomScrollbar.js">
+      <publishTime>07/04/2014 20:58:37</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.mobile.custom.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.nestable.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.pagination.js">
+      <publishTime>07/04/2014 20:24:07</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.slimscroll.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.sparkline.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.ui.touch-punch.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.validate.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/markdown/bootstrap-markdown.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/markdown/markdown.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/respond.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/select2.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/typeahead-bs2.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/x-editable/ace-editable.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="Assets/js/x-editable/bootstrap-editable.min.js">
+      <publishTime>06/28/2014 16:20:25</publishTime>
+    </File>
+    <File Include="bin/Jayrock.Json.dll">
+      <publishTime>06/20/2014 15:45:21</publishTime>
+    </File>
+    <File Include="bin/log4net.dll">
+      <publishTime>06/20/2014 15:45:21</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>06/21/2014 16:53:15</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>06/21/2014 16:53:13</publishTime>
+    </File>
+    <File Include="bin/Public.CL.dll">
+      <publishTime>08/09/2014 11:03:01</publishTime>
+    </File>
+    <File Include="bin/ServiceStack.Interfaces.dll">
+      <publishTime>06/25/2014 21:53:01</publishTime>
+    </File>
+    <File Include="bin/ServiceStack.Redis.dll">
+      <publishTime>06/25/2014 21:53:01</publishTime>
+    </File>
+    <File Include="bin/SMS.Model.dll">
+      <publishTime>08/09/2014 11:03:07</publishTime>
+    </File>
+    <File Include="bin/SMSWeb.dll">
+      <publishTime>08/09/2014 11:07:43</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.dll">
+      <publishTime>06/21/2014 16:53:19</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>06/21/2014 16:53:18</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.WebRequest.dll">
+      <publishTime>06/21/2014 16:53:19</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>06/21/2014 16:53:17</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>06/21/2014 16:53:20</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>06/21/2014 16:53:20</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>06/21/2014 16:53:18</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>06/21/2014 16:53:16</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>06/21/2014 16:53:17</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>06/21/2014 16:53:17</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>06/21/2014 16:53:17</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Net.Http.Formatting.resources.dll">
+      <publishTime>06/21/2014 16:53:24</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Net.Http.resources.dll">
+      <publishTime>06/21/2014 16:53:25</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Net.Http.WebRequest.resources.dll">
+      <publishTime>06/21/2014 16:53:25</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Helpers.resources.dll">
+      <publishTime>06/21/2014 16:53:22</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Http.resources.dll">
+      <publishTime>06/21/2014 16:53:23</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Http.WebHost.resources.dll">
+      <publishTime>06/21/2014 16:53:23</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Mvc.resources.dll">
+      <publishTime>06/21/2014 16:53:22</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Razor.resources.dll">
+      <publishTime>06/21/2014 16:53:21</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.WebPages.Deployment.resources.dll">
+      <publishTime>06/21/2014 16:53:22</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.WebPages.Razor.resources.dll">
+      <publishTime>06/21/2014 16:53:22</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.WebPages.resources.dll">
+      <publishTime>06/21/2014 16:53:22</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>06/21/2014 16:52:58</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>06/21/2014 16:53:25</publishTime>
+    </File>
+    <File Include="Views/Account/Login.cshtml">
+      <publishTime>07/04/2014 19:26:44</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>06/29/2014 17:19:09</publishTime>
+    </File>
+    <File Include="Views/Shared/_Foot.cshtml">
+      <publishTime>06/28/2014 16:23:12</publishTime>
+    </File>
+    <File Include="Views/Shared/_Header.cshtml">
+      <publishTime>06/29/2014 18:05:18</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>07/04/2014 22:48:35</publishTime>
+    </File>
+    <File Include="Views/Shared/_Menu.cshtml">
+      <publishTime>06/29/2014 18:01:26</publishTime>
+    </File>
+    <File Include="Views/SMS/Send.cshtml">
+      <publishTime>07/06/2014 16:31:02</publishTime>
+    </File>
+    <File Include="Views/SMS/SendDetail.cshtml">
+      <publishTime>07/19/2014 15:55:23</publishTime>
+    </File>
+    <File Include="Views/SMS/SendList.cshtml">
+      <publishTime>07/19/2014 15:12:06</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>06/21/2014 16:52:58</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>08/09/2014 11:07:45</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

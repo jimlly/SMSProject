@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SMS.IDAL
 {
-    class Class1
+   public class ISMSDAL
     {
     }
 }

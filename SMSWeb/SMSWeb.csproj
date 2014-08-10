@@ -441,8 +441,6 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\avatars\Thumbs.db" />
-    <Content Include="Assets\css\images\Thumbs.db" />
     <Content Include="Assets\font\fontawesome-webfont.woff" />
   </ItemGroup>
   <ItemGroup>
@@ -475,37 +473,21 @@
   <ItemGroup>
     <Content Include="Assets\css\jBoxSkins\Blue\Desktop.ini" />
     <Content Include="Assets\css\jBoxSkins\Blue\images\OneNote 目录.onetoc2" />
-    <Content Include="Assets\css\jBoxSkins\Blue\images\Thumbs.db" />
     <Content Include="Assets\css\jBoxSkins\Blue\OneNote 目录.onetoc2" />
     <Content Include="Assets\css\jBoxSkins\Bootstrap\images\OneNote 目录.onetoc2" />
-    <Content Include="Assets\css\jBoxSkins\Bootstrap\images\Thumbs.db" />
     <Content Include="Assets\css\jBoxSkins\Brown\Desktop.ini" />
-    <Content Include="Assets\css\jBoxSkins\Brown\images\Thumbs.db" />
     <Content Include="Assets\css\jBoxSkins\Default\Desktop.ini" />
-    <Content Include="Assets\css\jBoxSkins\Default\images\Thumbs.db" />
-    <Content Include="Assets\css\jBoxSkins\Default\Thumbs.db" />
     <Content Include="Assets\css\jBoxSkins\GrayCool\Desktop.ini" />
-    <Content Include="Assets\css\jBoxSkins\GrayCool\images\Thumbs.db" />
     <Content Include="Assets\css\jBoxSkins\Gray\Desktop.ini" />
-    <Content Include="Assets\css\jBoxSkins\Gray\images\Thumbs.db" />
     <Content Include="Assets\css\jBoxSkins\Green\Desktop.ini" />
-    <Content Include="Assets\css\jBoxSkins\Green\images\Thumbs.db" />
     <Content Include="Assets\css\jBoxSkins\GreyBlue\Desktop.ini" />
-    <Content Include="Assets\css\jBoxSkins\GreyBlue\images\Thumbs.db" />
     <Content Include="Assets\css\jBoxSkins\Purple\Desktop.ini" />
-    <Content Include="Assets\css\jBoxSkins\Purple\images\Thumbs.db" />
     <Content Include="Assets\css\jBoxSkins\Red\Desktop.ini" />
-    <Content Include="Assets\css\jBoxSkins\Red\images\Thumbs.db" />
     <Content Include="Assets\css\jBoxSkins\ShareBlue\Desktop.ini" />
-    <Content Include="Assets\css\jBoxSkins\ShareBlue\images\Thumbs.db" />
     <Content Include="Assets\css\jBoxSkins\ShareBrown\Desktop.ini" />
-    <Content Include="Assets\css\jBoxSkins\ShareBrown\images\Thumbs.db" />
     <Content Include="Assets\css\jBoxSkins\ShareGreen\Desktop.ini" />
-    <Content Include="Assets\css\jBoxSkins\ShareGreen\images\Thumbs.db" />
     <Content Include="Assets\css\jBoxSkins\SharePurple\Desktop.ini" />
-    <Content Include="Assets\css\jBoxSkins\SharePurple\images\Thumbs.db" />
     <Content Include="Assets\css\jBoxSkins\ShareRed\Desktop.ini" />
-    <Content Include="Assets\css\jBoxSkins\ShareRed\images\Thumbs.db" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Addr\Views\Contactor\Edit.cshtml" />
@@ -519,6 +501,9 @@
       <Project>{091e37ec-8833-4c58-bbe6-980e9dec8694}</Project>
       <Name>SMS.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\SMSWeb.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
