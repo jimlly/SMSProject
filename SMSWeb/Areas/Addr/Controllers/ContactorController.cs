@@ -1,4 +1,6 @@
-﻿using SMS.Model.Result;
+﻿using SMS.BLL.Addr;
+using SMS.Model.Result;
+using SMSWeb.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +10,7 @@ using System.Web.Mvc;
 
 namespace SMSWeb.Areas.Addr.Controllers
 {
-    public class ContactorController : Controller
+    public class ContactorController : BaseController
     {
         //
         // GET: /Addr/Contactor/
@@ -55,12 +57,12 @@ namespace SMSWeb.Areas.Addr.Controllers
         //
         // GET: /Addr/Contactor/Edit/5
 
-        public ActionResult Edit()
+        public ActionResult Edit(string contactId, string groupId)
         {
-            int contactorId = 0; int groupId = 2;
+          
             //ViewData["ContactorID"] = contactorId;
             //ViewData["GroupID"] = groupId;
-            ViewBag.ContactorID = contactorId;
+            ViewBag.ContactorID = contactId;
             ViewBag.GroupID = groupId;
             return View();
         }
@@ -113,6 +115,7 @@ namespace SMSWeb.Areas.Addr.Controllers
         public ContentResult GetContactorList()
         {
             var _rcl = new ResultContactorList();
+            var _cgm = new ContactorGroupManager();
             try
             {
                 string str;
@@ -130,20 +133,20 @@ namespace SMSWeb.Areas.Addr.Controllers
 
                 if (groupId == -2) //未分组
                 {
-                    //_rcl = _cgm.GetUnGroupedContactors(LoginUser.SeqNo, LoginUser.CompID, pageIndex, pageSize, searchContent);
+                    _rcl = _cgm.GetUnGroupedContactors(this.LoginInfo.UserID, LoginInfo.CompID, pageIndex, pageSize, searchContent);
                 }
                 else if (groupId == 0)//全部
                 {
-                    //_rcl = _cgm.GetAllContactors(LoginUser.SeqNo, LoginUser.CompID, pageIndex, pageSize, searchContent);
+                    _rcl = _cgm.GetAllContactors(LoginInfo.UserID, LoginInfo.CompID, pageIndex, pageSize, searchContent);
                 }
                 else
                 {
-                   // _rcl = _cgm.GetUserGroupContactors(LoginUser.SeqNo, groupId, LoginUser.CompID, pageIndex, pageSize, searchContent);
+                    _rcl = _cgm.GetUserGroupContactors(LoginInfo.UserID, groupId, LoginInfo.CompID, pageIndex, pageSize, searchContent);
                 }
 
                 if (!_rcl.State)
                 {
-                    //_log.Append("state", _rcl.State);
+                  
                 }
                 else
                 {

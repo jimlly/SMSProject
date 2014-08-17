@@ -34,21 +34,23 @@ namespace SMSWeb.Controllers
         }
 
         //
-        // POST: /SMS/Create
+        // POST: /SMS/Send
 
         [HttpPost]
-        public ActionResult Send(FormCollection collection)
+        public JsonResult Send(string TaskName,string Mobiles,int InputType,string Message,List<string> Ids)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            //try
+            //{
+            //    // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            //    return RedirectToAction("Index");
+            //}
+            //catch
+            //{
+            //    return View();
+            //}
+            var data = new { TaskName = TaskName, Mobiles = Mobiles, InputType = InputType, Message = Message };
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
         public ActionResult SendList()
         {

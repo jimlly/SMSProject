@@ -5,11 +5,12 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="zh-Cn">
 <head>
     
         <meta charset="utf-8" />
 		<title>登录页面 </title>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 		<meta name="keywords" content="" />
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -75,7 +76,7 @@
 
 											<div class="space-6"></div>
 
-											<form action="/" method="get">
+											<form action="/Account/Login" method="post">
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-left">
@@ -92,7 +93,14 @@
 															
 														</span>
 													</label>
-
+                                                    <label class="block clearfix ">
+														<span class="block input-icon input-icon-left">
+                                                            <i class="icon-lock"></i>
+															<input type="text" class="input-medium form-control" placeholder="验证码" />
+															
+														</span>
+                                                       
+													</label>
 													<div class="space"></div>
 
 													<div class="clearfix">

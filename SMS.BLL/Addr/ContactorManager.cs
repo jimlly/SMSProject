@@ -21,7 +21,7 @@ namespace SMS.BLL.Addr
 
         public ContactorManager()
         {
-            ContactorDal = null;// DALFactory.Addr.DataAccess.CreateContactorDAL();
+            ContactorDal =SMS.DALFactory.DataAccess.CreateContactorDAL();
             _log = new FunctionLogBuilder();
         }
 

@@ -20,8 +20,8 @@ namespace SMS.BLL.Addr
 
         public ContactorGroupManager()
         {
-            ContactorGroupDal = null;// DALFactory.Addr.DataAccess.CreateContactorGroupDAL();
-            ContactorDal = null;// DALFactory.Addr.DataAccess.CreateContactorDAL();
+            ContactorGroupDal = DALFactory.DataAccess.CreateContactorGroupDAL();
+            ContactorDal = DALFactory.DataAccess.CreateContactorDAL();
             _log = new FunctionLogBuilder();
         }
 

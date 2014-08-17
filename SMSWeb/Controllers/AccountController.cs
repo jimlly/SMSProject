@@ -15,6 +15,14 @@ namespace SMSWeb.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult Login(string userAccount,string password,string code="")
+        {
+            var session = HttpContext.Session;
+            session["LoginInfo"] = new SMS.Model.LoginInfo() { UserID = 1, CompID=0, UserAccount = "admin", UserName = "管理员" };
+            return RedirectToAction("Index", "Home");
+            
+        }
         public ActionResult LoginOut()
         {
             //todo

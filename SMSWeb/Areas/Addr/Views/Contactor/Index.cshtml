@@ -151,21 +151,17 @@
     <link rel="stylesheet" type="text/css" href="@Url.StaticFile("~/assets/Css/style.css")">
     <link rel="stylesheet" type="text/css" href="@Url.StaticFile("~/assets/Css/pagination.css")">
     <link href="@Url.StaticFile("~/assets/css/jquery.mCustomScrollbar.css")" rel="stylesheet" />
-    <script src="@Url.StaticFile("~/assets/js/jquery.mCustomScrollbar.js")"></script>
-    <script src="@Url.StaticFile("~/assets/js/jquery.pagination.js")"></script>
-    <script src="@Url.StaticFile("~/assets/js/jquery.mCustomScrollbar.js")"></script>
-    <script src="@Url.StaticFile("~/assets/js/jquery.json-2.4.js")"></script>
-    <script src="@Url.StaticFile("~/assets/js/AddrManage.js")"></script>
-    <script src="@Url.StaticFile("~/assets/js/EditAddress.js")"></script>
+   
     <script>
 
         //验证组名
         var checkGroupName = function (name) {
-            var groupNameRegex;
+           @* var groupNameRegex= @UserContext.Current.GroupNameRegex;
             if (groupNameRegex.test(name)) {
                 return true;
             }
-            return false;
+            return false;*@
+            return true;
         };
 
         //关闭弹出框
@@ -173,6 +169,12 @@
             $("loading").hide();
             $("#ExchangeModel").hide();
         }
-    </script>
-
+          </script>
+    <script src="@Url.StaticFile("~/assets/js/jquery.mCustomScrollbar.js")"></script>
+    <script src="@Url.StaticFile("~/assets/js/jquery.pagination.js")"></script>
+    <script src="@Url.StaticFile("~/assets/js/jquery.mCustomScrollbar.js")"></script>
+    <script src="@Url.StaticFile("~/assets/js/jquery.json-2.4.js")"></script>
+    <script src="@Url.StaticFile("~/assets/js/AddrManage.js")"></script>
+    <script src="@Url.StaticFile("~/assets/js/EditAddress.js")"></script>
+  
 }

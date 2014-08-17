@@ -49,6 +49,13 @@ namespace SMSWeb.Common
                 return ConfigHelper.GetConfigString("UserNameRegex");
             }
         }
+        public string GroupNameRegex
+        {
+            get
+            {
+                return ConfigHelper.GetConfigString("GroupNameRegex");
+            }
+        }
         
     }
 }

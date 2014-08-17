@@ -43,6 +43,7 @@
     <Compile Include="Addr\ContactorGroupDAL.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SmsDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Public\Public-Library\Public-Library.csproj">

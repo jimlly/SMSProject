@@ -51,7 +51,7 @@ var InitContactors = function (id) {
     //});
 
     //if (InHtmlCount == 0) {
-    $.post("/Addr/CotactorGroup/GetGroupCount", { groupId: $("#hidGroupId").val(), search: search }, function (count) {
+    $.post("/Addr/ContactorGroup/GetGroupCount", { groupId: $("#hidGroupId").val(), search: search }, function (count) {
         $("#Pagination").pagination(count, {
             callback: PageCallback,
             prev_text: '上一页',
@@ -129,19 +129,19 @@ function InitContactorsGroups() {
     //var allcount = window.Meetingtel.Web.Common.AjaxHandler.GetContactorCount("0", "").value;
     //$("#allSum").text(allcount);
 
-    $.post("/Addr/CotactorGroup/GetGroupCount", { groupId: "0", search: $("#txt_SearchContent").val() }, function (data) {
+    $.post("/Addr/ContactorGroup/GetGroupCount", { groupId: "0", search: $("#txt_SearchContent").val() }, function (data) {
         $("#allSum").text(data)
     });
     //未分组条数
     //var ungroupcount = window.Meetingtel.Web.Common.AjaxHandler.GetContactorCount("-2", "").value;
     //$("#unGroupedSum").text(ungroupcount);
 
-    $.post("/Addr/CotactorGroup/GetGroupCount", { groupId: "-2", search: $("#txt_SearchContent").val() }, function (data) {
+    $.post("/Addr/ContactorGroup/GetGroupCount", { groupId: "-2", search: $("#txt_SearchContent").val() }, function (data) {
         $("#unGroupedSum").text(data)
     });
 
     $("#ulGroup").empty();
-    $.post("/Addr/CotactorGroup/GetList", function (data) {
+    $.post("/Addr/ContactorGroup/GetList", function (data) {
 
         $("#ulGroup").append(data);
 
@@ -226,22 +226,26 @@ function InitContactorsGroups() {
 
 //设置管理组下拉菜单
 function initGroupsDropDownList() {
-    var rep = window.Meetingtel.Web.Common.AjaxHandler.GetAllContactorGroups();
-    //var rep = null;
-    if (rep != null && rep.value != null) {
-        $("#ul_mGroup").empty();
-        var tab = [];
-        $.each(rep.value, function (y, obj) {
-            tab.push("<li id='li_m" + y + "'>");
-            tab.push("<label class='checkbox'><input id='ckb_" + y + "' type='checkbox' name='cb_mItem' value='" + obj.ContactorGroupID + "' text='" + obj.ContactorGroupName + "'/>");
-            tab.push("</label>");
-            tab.push("<span id='sp_mItem' style='cursor:pointer' onclick=\"ChangeChkBoxState('ckb_" + y + "',this)\">" + obj.ContactorGroupName + "</span>");
-            tab.push("</li>");
-        });
-        $("#ul_mGroup").append(tab.join(''));
+   // var rep = window.Meetingtel.Web.Common.AjaxHandler.GetAllContactorGroups();
+    $.post("/Addr/ContactorGroup/GetALLGroups", function (data) {
+        //var rep = null;
+        if (data != null) {
+            $("#ul_mGroup").empty();
+            var tab = [];
+            $.each(data, function (y, obj) {
+                tab.push("<li id='li_m" + y + "'>");
+                tab.push("<label class='checkbox'><input id='ckb_" + y + "' type='checkbox' name='cb_mItem' value='" + obj.ContactorGroupID + "' text='" + obj.ContactorGroupName + "'/>");
+                tab.push("</label>");
+                tab.push("<span id='sp_mItem' style='cursor:pointer' onclick=\"ChangeChkBoxState('ckb_" + y + "',this)\">" + obj.ContactorGroupName + "</span>");
+                tab.push("</li>");
+            });
+            $("#ul_mGroup").append(tab.join(''));
 
 
-    }
+        }
+
+    });
+   
 }
 
 var ChangeChkBoxState = function (ckbId, that) {
@@ -260,37 +264,45 @@ var ChangeChkBoxState = function (ckbId, that) {
 
 //添加分组信息
 function AddGroupInfo(groupName) {
-    if (!window.checkGroupName(groupName)) {
+    window.jBox.tip('组名格式应为中文、英文、数字或者-、_、（），长度不超过25个字', 'error');
+    if (!checkGroupName(groupName)) {
+        
         window.jBox.tip('组名格式应为中文、英文、数字或者-、_、（），长度不超过25个字', 'error');
         return;
     }
-    var rep = window.Meetingtel.Web.Common.AjaxHandler.AddGroupInfo(groupName).value;
-    if (rep > 0) {
-        window.jBox.tip('添加分组成功', 'success');
-        $("#hidGroupName").val(groupName);
+    $.post("/Addr/ContactorGroup/AddGroup", { groupName: groupName }, function (rep) {
+        if (rep > 0) {
+            window.jBox.tip('添加分组成功', 'success');
+            $("#hidGroupName").val(groupName);
 
-        //管理组下拉菜单更新
-        initGroupsDropDownList();
-        var newGroupHtml = "<li style='cursor: pointer' id='li" + rep + "'><div onclick=li_click('li" + rep + "','" + groupName + "') class='group-user-show' id='divShowGroup" + rep + "'><a>" + groupName + "</a><span class='badge badge-hover3' id='spCount" + rep + "'>0</span><span onclick=javascript:li_dblclick('" + rep + "','" + groupName + "') title='编辑' class='badge badge-hover2'><span><i class='icon-pencil icon-white'></i></span></span><span onclick=javascript:li_delclick('li" + rep + "') title='删除' class='badge badge-hover'><span><i class='icon-trash icon-white'></i></span></span></div><div class='group-user-edit form-inline' id='divEditGroup" + rep + "'><input type='text' value='" + groupName + "' class='input-small' id='txtEdit" + rep + "'><input type='button' class='btn btn-primary' value='确定' onclick=SaveGroupByLeft('" + rep + "') id='btnOK'><input type='button' class='btn' value='取消' onclick=CloseGroupByLeft('" + rep + "') id='btnCancel'></div></li>";
-        $("#ulGroup").append(newGroupHtml);
-        //InitContactorsGroups();
-        //InitContactors();
-        //initGroupsDropDownList();
-    } else if (rep == -3) {
-        window.jBox.tip('添加失败，存在同名的组', 'error');
-    } else {
-        window.jBox.tip('添加分组失败', 'error');
-    }
+            //管理组下拉菜单更新
+            initGroupsDropDownList();
+            var newGroupHtml = "<li style='cursor: pointer' id='li" + rep + "'><div onclick=li_click('li" + rep + "','" + groupName + "') class='group-user-show' id='divShowGroup" + rep + "'><a>" + groupName + "</a><span class='badge badge-hover3' id='spCount" + rep + "'>0</span><span onclick=javascript:li_dblclick('" + rep + "','" + groupName + "') title='编辑' class='badge badge-hover2'><span><i class='icon-pencil icon-white'></i></span></span><span onclick=javascript:li_delclick('li" + rep + "') title='删除' class='badge badge-hover'><span><i class='icon-trash icon-white'></i></span></span></div><div class='group-user-edit form-inline' id='divEditGroup" + rep + "'><input type='text' value='" + groupName + "' class='input-small' id='txtEdit" + rep + "'><input type='button' class='btn btn-primary' value='确定' onclick=SaveGroupByLeft('" + rep + "') id='btnOK'><input type='button' class='btn' value='取消' onclick=CloseGroupByLeft('" + rep + "') id='btnCancel'></div></li>";
+            $("#ulGroup").append(newGroupHtml);
+            //InitContactorsGroups();
+            //InitContactors();
+            //initGroupsDropDownList();
+        } else if (rep == -3) {
+            window.jBox.tip('添加失败，存在同名的组', 'error');
+        } else {
+            window.jBox.tip('添加分组失败', 'error');
+        }
+    });
+   // var rep = window.Meetingtel.Web.Common.AjaxHandler.AddGroupInfo(groupName).value;
+   
 }
 
 //修改分组信息
 function UpdateGroupInfo(groupId, groupName) {
-    if (!window.checkGroupName(groupName)) {
+    if (!checkGroupName(groupName)) {
         window.jBox.tip('组名格式应为中文、英文、数字或者-、_、（），长度不超过25个字', 'error');
         return 0;
     }
-    var rep = window.Meetingtel.Web.Common.AjaxHandler.UpdateGroupInfo(groupId, groupName).value;
-    return rep;
+    $.post("/Addr/ContactorGroup/Edit", { groupId: groupId, groupName: groupName }, function (rsp) {
+        return rsp;
+    });
+    //var rep = window.Meetingtel.Web.Common.AjaxHandler.UpdateGroupInfo(groupId, groupName).value;
+    //return rep;
 }
 
 //保存左侧分组编辑事件
@@ -404,395 +416,394 @@ function li_delclick(id) {
     var submit = function (v, h, f) {
         if (v == 'ok') {
             var result = Meetingtel.Web.Common.AjaxHandler.DelGroupInfo(id.substring(2));
-            if (result) {
-                $("#" + id).remove();
-                window.jBox.tip('成功删除分组', 'success');
-                $("#hidGroupId").val(0);
-                $("#sp_groupName").text("所有联系人");
-                InitContactors();
-                //更新管理组下拉框
-                initGroupsDropDownList();
-                //InitContactorsGroups();
-                InitContactors(0);
-            } else {
-                window.jBox.tip('删除分组失败', 'error');
+
+            $.post("/Addr/ContactorGroup/DelGroup", { groupId: id.substring(2) }, function (result) {
+                if (result) {
+                    $("#" + id).remove();
+                    window.jBox.tip('成功删除分组', 'success');
+                    $("#hidGroupId").val(0);
+                    $("#sp_groupName").text("所有联系人");
+                    InitContactors();
+                    //更新管理组下拉框
+                    initGroupsDropDownList();
+                    //InitContactorsGroups();
+                    InitContactors(0);
+                } else {
+                    window.jBox.tip('删除分组失败', 'error');
+                }
             }
-        }
-        return true; //close
-    };
+            );
+            return true; //close
+        };
 
-    $.jBox.confirm("确定删除 " + $("#" + id + " a").text() + " 分组吗？", "提示", submit);
+        $.jBox.confirm("确定删除 " + $("#" + id + " a").text() + " 分组吗？", "提示", submit);
 
-    //$("#ulGroup li").remove("li[id="+id+"]");
-}
-
-
-
-/*/////右侧通讯录操作////////////////////////////////////////////////////////////////////////*/
-
-//获取通讯录列表中复选框选中项value
-function getAddress_cb_checked() {
-    var result = new Array();
-    $("[name = cbItem]:checkbox").each(function () {
-        if ($(this).is(":checked")) {
-            result.push(parseInt($(this).attr("value")));
-        }
-    });
-    return result;
-}
-
-//获取管理组下拉列表中复选框选中项value
-function getGroup_cb_checked() {
-    var result = new Array();
-    $("[name = cb_mItem]:checkbox").each(function () {
-        if ($(this).is(":checked"))
-            result.push(parseInt($(this).attr("value")));
-    });
-    return result;
-}
-
-//全选、全不选
-function cb_allclick() {
-    if ($("#cbAll").attr("checked") == "checked") {
-        //$(':checkbox').attr('checked', 'checked');
-        $("[name = cbItem]:checkbox").each(function () {
-            $(this).attr('checked', 'checked');
-        });
-    }
-    else {
-        //$(':checkbox').removeAttr('checked');
-        $("[name = cbItem]:checkbox").each(function () {
-            if ($(this).is(":checked"))
-                $(this).removeAttr('checked');
-        });
+        //$("#ulGroup li").remove("li[id="+id+"]");
     }
 }
 
-//设置联系人分组
-function SetContactGroup() {
+
+
+    /*/////右侧通讯录操作////////////////////////////////////////////////////////////////////////*/
+
+    //获取通讯录列表中复选框选中项value
+    function getAddress_cb_checked() {
+        var result = new Array();
+        $("[name = cbItem]:checkbox").each(function () {
+            if ($(this).is(":checked")) {
+                result.push(parseInt($(this).attr("value")));
+            }
+        });
+        return result;
+    }
+
     //获取管理组下拉列表中复选框选中项value
-    var groupIds = getGroup_cb_checked();
-    //获取通讯录列表中复选框选中项value
-    var contactIds = getAddress_cb_checked();
-    var result = false;
-
-    if (groupIds.length == 0) {
-        $.jBox.tip('请勾选组名');
-        return;
-    }
-    else if (contactIds.length == 0) {
-        $.jBox.tip('请选择要编辑分组的联系人');
-        return;
-    }
-    else if (contactIds.length == 1) {
-        result = window.Meetingtel.Web.Common.AjaxHandler.SetContactGroupBySingle(contactIds, groupIds);
-    } else
-        result = window.Meetingtel.Web.Common.AjaxHandler.SetContactGroupByMulti(contactIds, groupIds);
-
-    if (result) {
-        window.jBox.tip('设置分组成功', 'success');
-        managerShow();
-        //InitContactorsGroups();
-        if (typeof Array.indexOf !== 'function') {
-            Array.prototype.indexOf = function (args) {
-                var index = -1;
-                for (var i = 0, l = this.length; i < l; i++) {
-                    if (this[i] === args) {
-                        index = i;
-                        break;
-                    }
-                }
-                return index;
-            };
-        }
-        $(contactIds).each(function (i, contactor) {
-            //联系人原分组
-            var arrContacrGroup = $("#adrTdGroup" + contactor).html().split(' ');
-
-            $(groupIds).each(function (i, group) {
-                var count;
-                //原分组不包含新组，加分组数量
-                if (arrContacrGroup.indexOf(group) < 0) {
-                    count = parseInt($("#spCount" + group).text());
-                    $("#spCount" + group).text(count + 1);
-                }
-            });
-
-            $(arrContacrGroup).each(function (i, group) {
-                var count;
-                //新组不包含原分组，减分组数量
-                if (groupIds.indexOf(group) < 0) {
-                    count = parseInt($("#spCount" + group).text());
-                    $("#spCount" + group).text(count - 1) < 0 ? $("#spCount" + group).text(0) : $("#spCount" + group).text(count - 1);
-                }
-            });
-
+    function getGroup_cb_checked() {
+        var result = new Array();
+        $("[name = cb_mItem]:checkbox").each(function () {
+            if ($(this).is(":checked"))
+                result.push(parseInt($(this).attr("value")));
         });
-        InitContactors();
-    } else {
-        window.jBox.tip('设置分组失败', 'error');
-    }
-}
-
-//删除联系人
-function DelContact() {
-    //获取通讯录列表中复选框选中项value
-    var contactIds = getAddress_cb_checked();
-
-    if (contactIds.length == 0) {
-        $.jBox.tip('请选择要删除的联系人', 'error');
-        return;
+        return result;
     }
 
-    var currentGroup = $("#sp_groupName").text();
-    var currentGroupId = $("#hidGroupId").val();
+    //全选、全不选
+    function cb_allclick() {
+        if ($("#cbAll").attr("checked") == "checked") {
+            //$(':checkbox').attr('checked', 'checked');
+            $("[name = cbItem]:checkbox").each(function () {
+                $(this).attr('checked', 'checked');
+            });
+        }
+        else {
+            //$(':checkbox').removeAttr('checked');
+            $("[name = cbItem]:checkbox").each(function () {
+                if ($(this).is(":checked"))
+                    $(this).removeAttr('checked');
+            });
+        }
+    }
 
-    var submit = function (v, h, f) {
-        if (v == 'ok') {
-            var result;
-            if (currentGroup == "所有联系人" || currentGroup == "未分组联系人") {
-                //彻底删除联系人
-                result = window.Meetingtel.Web.Common.AjaxHandler.DelContact(contactIds);
-            } else {
-                //从当前组中删除联系人
-                result = window.Meetingtel.Web.Common.AjaxHandler.DelContactByGroup(contactIds, currentGroupId);
-            }
-            if (result) {
-                window.jBox.tip('删除联系人成功', 'success');
-                var count;
-                var sum;
-                var ungroupCount;
-                if (currentGroup == "所有联系人") {
+    //设置联系人分组
+    function SetContactGroup() {
+        //获取管理组下拉列表中复选框选中项value
+        var groupIds = getGroup_cb_checked();
+        //获取通讯录列表中复选框选中项value
+        var contactIds = getAddress_cb_checked();
+        var result = false;
+
+        if (groupIds.length == 0) {
+            $.jBox.tip('请勾选组名');
+            return;
+        }
+        else if (contactIds.length == 0) {
+            $.jBox.tip('请选择要编辑分组的联系人');
+            return;
+        }
+        //else if (contactIds.length == 1) {
+        //    result = window.Meetingtel.Web.Common.AjaxHandler.SetContactGroupBySingle(contactIds, groupIds);
+        //} else
+        //    result = window.Meetingtel.Web.Common.AjaxHandler.SetContactGroupByMulti(contactIds, groupIds);
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: '/Addr/ContactorGroup/SetContactGroupByMulti',
+            traditional: true,
+            data: { contactIds: contactIds, groupIds: groupIds },
+            success: function (result) {
+
+                if (result) {
+                    window.jBox.tip('设置分组成功', 'success');
+                    managerShow();
+                    //InitContactorsGroups();
+                    if (typeof Array.indexOf !== 'function') {
+                        Array.prototype.indexOf = function (args) {
+                            var index = -1;
+                            for (var i = 0, l = this.length; i < l; i++) {
+                                if (this[i] === args) {
+                                    index = i;
+                                    break;
+                                }
+                            }
+                            return index;
+                        };
+                    }
                     $(contactIds).each(function (i, contactor) {
                         //联系人原分组
                         var arrContacrGroup = $("#adrTdGroup" + contactor).html().split(' ');
-                        count = parseInt($("#allSum").text());
-                        ungroupCount = parseInt($("#unGroupedSum").text());
-                        if (arrContacrGroup == null || arrContacrGroup[0] == "") {
-                            $("#allSum").text(count - 1) < 0 ? $("#allSum").text(0) : $("#allSum").text(count - 1);
-                            $("#unGroupedSum").text(ungroupCount - 1) < 0 ? $("#unGroupedSum").text(0) : $("#unGroupedSum").text(ungroupCount - 1);
-                        } else {
-                            $("#allSum").text(count - 1) < 0 ? $("#allSum").text(0) : $("#allSum").text(count - 1);
-                            $(arrContacrGroup).each(function (y, group) {
-                                var spCount = parseInt($("#spCount" + group).text());
-                                $("#spCount" + group).text(spCount - 1) < 0 ? $("#spCount" + group).text(0) : $("#spCount" + group).text(spCount - 1);
-                            });
-                        }
+
+                        $(groupIds).each(function (i, group) {
+                            var count;
+                            //原分组不包含新组，加分组数量
+                            if (arrContacrGroup.indexOf(group) < 0) {
+                                count = parseInt($("#spCount" + group).text());
+                                $("#spCount" + group).text(count + 1);
+                            }
+                        });
+
+                        $(arrContacrGroup).each(function (i, group) {
+                            var count;
+                            //新组不包含原分组，减分组数量
+                            if (groupIds.indexOf(group) < 0) {
+                                count = parseInt($("#spCount" + group).text());
+                                $("#spCount" + group).text(count - 1) < 0 ? $("#spCount" + group).text(0) : $("#spCount" + group).text(count - 1);
+                            }
+                        });
+
                     });
-                } else if (currentGroup == "未分组联系人") {
-                    count = parseInt($("#allSum").text());
-                    ungroupCount = parseInt($("#unGroupedSum").text());
-                    sum = parseInt(contactIds.length);
-                    $("#unGroupedSum").text(ungroupCount - sum) < 0 ? $("#unGroupedSum").text(0) : $("#unGroupedSum").text(ungroupCount - sum);
-                    $("#allSum").text(count - sum) < 0 ? $("#allSum").text(0) : $("#allSum").text(count - sum);
+                    InitContactors();
                 } else {
-                    //InitContactorsGroups();
-                    count = $("#spCount" + currentGroupId).text();
-                    sum = parseInt(contactIds.length);
-                    if (count - sum >= 0) {
-                        $("#spCount" + currentGroupId).text(count - sum);
-                    } else {
-                        $("#spCount" + currentGroupId).text(0);
-                    }
+                    window.jBox.tip('设置分组失败', 'error');
                 }
-                InitContactors();
-            } else {
-                window.jBox.tip('删除联系人失败', 'error');
             }
+        });
+    }
+
+
+    //删除联系人
+    function DelContact() {
+        //获取通讯录列表中复选框选中项value
+        var contactIds = getAddress_cb_checked();
+
+        if (contactIds.length == 0) {
+            $.jBox.tip('请选择要删除的联系人', 'error');
+            return;
         }
-        return true;
-    };
 
-    if (currentGroupId == "" || currentGroupId == "0" || currentGroupId == "-2") {
-        $.jBox.confirm("确认要删除这" + contactIds.length + "位联系人，这将会彻底删除这" + contactIds.length + "位联系人 ？", "提示", submit);
-    } else {
-        $.jBox.confirm("确认要删除这" + contactIds.length + "位联系人，本次删除只是针对当前组", "提示", submit);
+        var currentGroup = $("#sp_groupName").text();
+        var currentGroupId = $("#hidGroupId").val();
+
+        var submit = function (v, h, f) {
+            if (v == 'ok') {
+                var result;
+                if (currentGroup == "所有联系人" || currentGroup == "未分组联系人") {
+                    //彻底删除联系人
+                    // result = window.Meetingtel.Web.Common.AjaxHandler.DelContact(contactIds);
+                    currentGroupId = 0;
+                }
+                //else {
+                //    //从当前组中删除联系人
+                //    //  result = window.Meetingtel.Web.Common.AjaxHandler.DelContactByGroup(contactIds, currentGroupId);
+                //}
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: '/Addr/ContactorGroup/DelContactByGroup',
+                    traditional: true,
+                    data: { contactIds: contactIds, currentGroupId: currentGroupId },
+                    success: function (result) {
+                        if (result) {
+                            window.jBox.tip('删除联系人成功', 'success');
+                            var count;
+                            var sum;
+                            var ungroupCount;
+                            if (currentGroup == "所有联系人") {
+                                $(contactIds).each(function (i, contactor) {
+                                    //联系人原分组
+                                    var arrContacrGroup = $("#adrTdGroup" + contactor).html().split(' ');
+                                    count = parseInt($("#allSum").text());
+                                    ungroupCount = parseInt($("#unGroupedSum").text());
+                                    if (arrContacrGroup == null || arrContacrGroup[0] == "") {
+                                        $("#allSum").text(count - 1) < 0 ? $("#allSum").text(0) : $("#allSum").text(count - 1);
+                                        $("#unGroupedSum").text(ungroupCount - 1) < 0 ? $("#unGroupedSum").text(0) : $("#unGroupedSum").text(ungroupCount - 1);
+                                    } else {
+                                        $("#allSum").text(count - 1) < 0 ? $("#allSum").text(0) : $("#allSum").text(count - 1);
+                                        $(arrContacrGroup).each(function (y, group) {
+                                            var spCount = parseInt($("#spCount" + group).text());
+                                            $("#spCount" + group).text(spCount - 1) < 0 ? $("#spCount" + group).text(0) : $("#spCount" + group).text(spCount - 1);
+                                        });
+                                    }
+                                });
+                            } else if (currentGroup == "未分组联系人") {
+                                count = parseInt($("#allSum").text());
+                                ungroupCount = parseInt($("#unGroupedSum").text());
+                                sum = parseInt(contactIds.length);
+                                $("#unGroupedSum").text(ungroupCount - sum) < 0 ? $("#unGroupedSum").text(0) : $("#unGroupedSum").text(ungroupCount - sum);
+                                $("#allSum").text(count - sum) < 0 ? $("#allSum").text(0) : $("#allSum").text(count - sum);
+                            } else {
+                                //InitContactorsGroups();
+                                count = $("#spCount" + currentGroupId).text();
+                                sum = parseInt(contactIds.length);
+                                if (count - sum >= 0) {
+                                    $("#spCount" + currentGroupId).text(count - sum);
+                                } else {
+                                    $("#spCount" + currentGroupId).text(0);
+                                }
+                            }
+                            InitContactors();
+                        } else {
+                            window.jBox.tip('删除联系人失败', 'error');
+                        }
+                    }
+                });
+            }
+            return true;
+        };
+
+        if (currentGroupId == "" || currentGroupId == "0" || currentGroupId == "-2") {
+            $.jBox.confirm("确认要删除这" + contactIds.length + "位联系人，这将会彻底删除这" + contactIds.length + "位联系人 ？", "提示", submit);
+        } else {
+            $.jBox.confirm("确认要删除这" + contactIds.length + "位联系人，本次删除只是针对当前组", "提示", submit);
+        }
     }
-}
 
-//编辑联系人
-function EditContact(contactId, target) {
-    Fadein(contactId, target);
-}
-
-
-
-/*/////编辑层滑入滑出操作////////////////////////////////////////////////////////////////////////*/
-
-var cont = "";//记录展示层的ID
-
-//编辑层滑入
-function Fadein(contactId, target) {
-    if ($(target).closest("tr").hasClass("clicked")) {
-        return;
+    //编辑联系人
+    function EditContact(contactId, target) {
+        Fadein(contactId, target);
     }
-    $("tr.clicked").removeClass("clicked");//如果其他行正在编辑状态，移除其点击状态
-    $(target).attr("id") == "btAdd" ? $(target).attr("disabled", "disabled") : $(target).closest("tr").addClass("clicked");
-    $("#" + cont).html("");
-    if (cont != "") {
+
+
+
+    /*/////编辑层滑入滑出操作////////////////////////////////////////////////////////////////////////*/
+
+    var cont = "";//记录展示层的ID
+
+    //编辑层滑入
+    function Fadein(contactId, target) {
+        if ($(target).closest("tr").hasClass("clicked")) {
+            return;
+        }
+        $("tr.clicked").removeClass("clicked");//如果其他行正在编辑状态，移除其点击状态
+        $(target).attr("id") == "btAdd" ? $(target).attr("disabled", "disabled") : $(target).closest("tr").addClass("clicked");
+        $("#" + cont).html("");
+        if (cont != "") {
+            $("#" + cont).slideUp();
+            $("#" + cont).html("");
+            cont = "";
+        }
+
+        cont = contactId == "" ? "divEdit" : "td" + contactId;
+
+
+        var groupId = $("#hidGroupId").val();
+        var parames = { "contactId": contactId, "groupId": groupId };
+        $.ajax({
+            url: '/Addr/Contactor/Edit',
+            data: parames,
+            error: function () { window.jBox.tip('修改联系人失败', 'error'); },
+            success: function (data) {
+                $("#" + cont).html(data);
+                $("#" + cont).slideDown("500");
+            }
+        });
+    }
+
+    //编辑层滑出
+    function Fadeout(target) {
+
+        //取消点击行或者添加新行被禁用
+        if ($("button#btAdd").attr("disabled")) {
+            $("button#btAdd").removeAttr("disabled");
+        } else {
+            $("tr.clicked").removeClass("clicked");
+        }
+
         $("#" + cont).slideUp();
         $("#" + cont).html("");
         cont = "";
     }
 
-    cont = contactId == "" ? "divEdit" : "td" + contactId;
+    //管理组下拉菜单显示隐藏
+    var managerShow = function () {
 
-
-    var groupId = $("#hidGroupId").val();
-    var parames = { "contactId": contactId, "groupId": groupId };
-    $.ajax({
-        url: '/Addr/Contactor/Edit',
-        data: parames,
-        error: function () { window.jBox.tip('修改联系人失败', 'error'); },
-        success: function (data) {
-            $("#" + cont).html(data);
-            $("#" + cont).slideDown("500");
+        //加载管理组
+        if ($("#ul_mGroup").html() == "") {
+            //alert("加载"); //第一次点击加载
+            initGroupsDropDownList();
         }
-    });
-}
 
-//编辑层滑出
-function Fadeout(target) {
-
-    //取消点击行或者添加新行被禁用
-    if ($("button#btAdd").attr("disabled")) {
-        $("button#btAdd").removeAttr("disabled");
-    } else {
-        $("tr.clicked").removeClass("clicked");
-    }
-
-    $("#" + cont).slideUp();
-    $("#" + cont).html("");
-    cont = "";
-}
-
-//管理组下拉菜单显示隐藏
-var managerShow = function () {
-
-    //加载管理组
-    if ($("#ul_mGroup").html() == "") {
-        //alert("加载"); //第一次点击加载
-        initGroupsDropDownList();
-    }
-
-    var divDisplay = $("#div_GroupManager").css("display");
-    if (divDisplay == "none") {
-        //alert('enter1');
+        var divDisplay = $("#div_GroupManager").css("display");
+        if (divDisplay == "none") {
+            //alert('enter1');
 
 
-        $("#div_GroupManager").css("display", "block");
+            $("#div_GroupManager").css("display", "block");
 
-        $(document).click(function () {
-            $div = $("#div_GroupManager");
-            if ($div.data("enter") == 0) {
-                //alert('enter');
-                $div.data("enter", "1");
-                $div.hide();
-                $(document).unbind("click");
+            $(document).click(function () {
+                $div = $("#div_GroupManager");
+                if ($div.data("enter") == 0) {
+                    //alert('enter');
+                    $div.data("enter", "1");
+                    $div.hide();
+                    $(document).unbind("click");
+                }
+
+            });
+        } else {
+            $("#div_GroupManager").css("display", "none");
+        }
+
+        $("[name = cb_mItem]:checkbox").each(function () {
+            //清空选中组
+            $(this).removeAttr('checked');
+            //当前组选中
+            var groupId = $("#hidGroupId").val();
+            if (groupId != 0 && groupId != -2) {
+                if ($(this).attr('value') == groupId) {
+                    $(this).attr('checked', 'checked');
+                }
             }
-
         });
-    } else {
-        $("#div_GroupManager").css("display", "none");
-    }
+    };
 
-    $("[name = cb_mItem]:checkbox").each(function () {
-        //清空选中组
-        $(this).removeAttr('checked');
-        //当前组选中
+    //导入导出事件
+    var importXlsAddr = function () {
+        //$.jBox.open("iframe:Address/ImportAndExport.aspx", "导入/导出", 600, 430, { buttons: {} });
+        //$.post("/Address/ImportAndExport.aspx", function (data) {
+
+        //});
+        //拖放元素
+        $("#ifraExchage").attr("src", "/Address/ImportAndExport.aspx");
+        //添加tab事件
+        $(".Export").click(function () {
+            $(this).addClass("active").siblings().removeClass("active");
+            var dom = navigator.appName == "Netscape" ? document.getElementById("ifraExchage").contentDocument : window.frames["ifraExchage"].document;
+            dom.getElementById("hidType").value = "1";
+            dom.getElementById("Import").style.display = "none";
+            dom.getElementById("Export").style.display = "block";
+        });
+        $(".Import").click(function () {
+            $(this).addClass("active").siblings().removeClass("active");
+            var dom = navigator.appName == "Netscape" ? document.getElementById("ifraExchage").contentDocument : window.frames["ifraExchage"].document;
+            dom.getElementById("hidType").value = "0";
+            dom.getElementById("Export").style.display = "none";
+            dom.getElementById("Import").style.display = "block";
+        });
+        $("#ExchangeModel").show().ppdrag();
+        //拖放导致按钮冒泡 造成flash上传附件按钮点击无效
+        //$("#ExchangeModel .tab-content").mousedown(function (e) {
+        //    if (e && e.stopPropagation) {//非IE   
+        //        e.stopPropagation();
+        //    }
+        //    else {//IE    
+        //        window.event.cancelBubble = true;
+        //    }
+        //});
+
+    };
+
+    //导出
+    var exportXlsAddr = function () {
         var groupId = $("#hidGroupId").val();
-        if (groupId != 0 && groupId != -2) {
-            if ($(this).attr('value') == groupId) {
-                $(this).attr('checked', 'checked');
+        $.ajax({
+            url: "../Common/AddressExport.ashx",
+            type: "get",
+            data: "groupid=" + groupId,
+            beforeSend: function (XMLHttpRequest) {
+                //发送请求前可修改 XMLHttpRequest 对象的函数
+                //alert("loading");
+            },
+            success: function (data, textStatus) {
+                //请求成功后回调函数
+                alert("导出成功");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                // 请求失败后回调函数
+                alert("导出失败");
+            },
+            complete: function (XMLHttpRequest, textStatus) {
+                //请求完成后回调函数 (请求成功或失败时均调用)
+                //alert("complete");
             }
-        }
-    });
-};
-
-//导入导出事件
-var importXlsAddr = function () {
-    //$.jBox.open("iframe:Address/ImportAndExport.aspx", "导入/导出", 600, 430, { buttons: {} });
-    //$.post("/Address/ImportAndExport.aspx", function (data) {
-
-    //});
-    //拖放元素
-    $("#ifraExchage").attr("src", "/Address/ImportAndExport.aspx");
-    //添加tab事件
-    $(".Export").click(function () {
-        $(this).addClass("active").siblings().removeClass("active");
-        var dom = navigator.appName == "Netscape" ? document.getElementById("ifraExchage").contentDocument : window.frames["ifraExchage"].document;
-        dom.getElementById("hidType").value = "1";
-        dom.getElementById("Import").style.display = "none";
-        dom.getElementById("Export").style.display = "block";
-    });
-    $(".Import").click(function () {
-        $(this).addClass("active").siblings().removeClass("active");
-        var dom = navigator.appName == "Netscape" ? document.getElementById("ifraExchage").contentDocument : window.frames["ifraExchage"].document;
-        dom.getElementById("hidType").value = "0";
-        dom.getElementById("Export").style.display = "none";
-        dom.getElementById("Import").style.display = "block";
-    });
-    $("#ExchangeModel").show().ppdrag();
-    //拖放导致按钮冒泡 造成flash上传附件按钮点击无效
-    //$("#ExchangeModel .tab-content").mousedown(function (e) {
-    //    if (e && e.stopPropagation) {//非IE   
-    //        e.stopPropagation();
-    //    }
-    //    else {//IE    
-    //        window.event.cancelBubble = true;
-    //    }
-    //});
-
-};
-
-//导出
-var exportXlsAddr = function () {
-    var groupId = $("#hidGroupId").val();
-    $.ajax({
-        url: "../Common/AddressExport.ashx",
-        type: "get",
-        data: "groupid=" + groupId,
-        beforeSend: function (XMLHttpRequest) {
-            //发送请求前可修改 XMLHttpRequest 对象的函数
-            //alert("loading");
-        },
-        success: function (data, textStatus) {
-            //请求成功后回调函数
-            alert("导出成功");
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            // 请求失败后回调函数
-            alert("导出失败");
-        },
-        complete: function (XMLHttpRequest, textStatus) {
-            //请求完成后回调函数 (请求成功或失败时均调用)
-            //alert("complete");
-        },
-    });
-};
-
-
-var defaultData = [
-          {
-              text: 'Parent 1',
-              href: '#parent1',
-              tags: ['4'],
-              nodes: [{ text: '李思思', id: '772432', href: '#', title: '手机号：13810712519', phone: '13810712519', selected: false, parentnode: 6710 }, { text: 'Nancy', id: '772430', href: '#', title: '手机号：15215558585', phone: '15215558585', selected: false, parentnode: 6710 }]
-          },
-          {
-              text: 'Parent 2',
-              href: '#parent2',
-              tags: ['0']
-          }
-]
-
-var addrSync = function () {
-    $("#loading").show();
-    var result = window.Meetingtel.Web.Common.AjaxHandler.ContactorWaySync().value;
-    if (result) {
-        window.jBox.tip('同步成功', 'success');
-    } else {
-        window.jBox.tip('同步失败', 'error');
-    }
-    $("#loading").hide();
-};
+        });
+    };

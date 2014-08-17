@@ -26,15 +26,15 @@ namespace SMS.Model
 		/// <summary>
         /// Priority
         /// </summary>
-		public int Priority { get; set; }
+		public SmsPriority Priority { get; set; }
 		/// <summary>
         /// 1 手工录入 2 文本导入 3 excel导入
         /// </summary>
-		public int InputType { get; set; }
+		public InputType InputType { get; set; }
 		/// <summary>
         /// 1 即时 2 定时
         /// </summary>
-		public int SendWay { get; set; }
+		public SendWay SendWay { get; set; }
 		/// <summary>
         /// SendTime
         /// </summary>
@@ -50,7 +50,7 @@ namespace SMS.Model
 		/// <summary>
         /// Status
         /// </summary>
-		public int Status { get; set; }
+		public BatchState Status { get; set; }
 		/// <summary>
         /// CompletedTime
         /// </summary>
@@ -74,7 +74,7 @@ namespace SMS.Model
 		/// <summary>
         /// 1 普通短信 2 长短信 3 免费短信
         /// </summary>
-		public int SmsType { get; set; }
+		public SmsType SmsType { get; set; }
 		/// <summary>
         /// Amount
         /// </summary>
@@ -82,7 +82,7 @@ namespace SMS.Model
 		/// <summary>
         /// ApprovalTimeApprovalTime
         /// </summary>
-		public DateTime ApprovalTimeApprovalTime { get; set; }
+		public DateTime ApprovalTime { get; set; }
 		/// <summary>
         /// MsgType
         /// </summary>
@@ -91,5 +91,7 @@ namespace SMS.Model
         /// CreateTime
         /// </summary>
 		public DateTime CreateTime { get; set; }
+
+        public List<SmsDetailInfo> SmsDetailList { get; set; }
     }
 }

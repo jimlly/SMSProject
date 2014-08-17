@@ -42,7 +42,7 @@ namespace SMS.SQLServerDAL.Addr
 
             try
             {
-                _addrDatabase = new MssqlDatabase(DBSource.DBYtAddressBook);
+                _addrDatabase = new MssqlDatabase();
             }
             catch (Exception ex)
             {

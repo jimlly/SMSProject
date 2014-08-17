@@ -13,8 +13,12 @@ namespace Public.DB
         private SqlConnection _con;
         private SqlTransaction _trans;
 
-        public MssqlDatabase(string connectionString)
+        public MssqlDatabase(string connectionString="")
         {
+            if (connectionString == "")
+            {
+                connectionString = GetConnectString("ConnectionString_Sms");
+            }
             _con = new SqlConnection(connectionString);
             _cmd = new SqlCommand {Connection = _con};
         }
@@ -388,7 +392,7 @@ namespace Public.DB
             if (_con == null)
             {
                 _con =
-                    new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString_ytSms"].ConnectionString);
+                    new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString_Sms"].ConnectionString);
             }
             if (_con.State == ConnectionState.Closed)
                 _con.Open();

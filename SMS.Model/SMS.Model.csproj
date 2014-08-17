@@ -46,12 +46,18 @@
     <Compile Include="Contactor.cs" />
     <Compile Include="ContactorGroup.cs" />
     <Compile Include="ContactWay.cs" />
+    <Compile Include="Enum.cs" />
+    <Compile Include="LoginInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result\ResultContactGroupList.cs" />
     <Compile Include="Result\ResultContactList.cs" />
     <Compile Include="Result\ResultContactorDetail.cs" />
     <Compile Include="Result\ResultContactorGroupList.cs" />
     <Compile Include="Result\ResultContactorList.cs" />
+    <Compile Include="Result\ResultSmsDetailList.cs" />
+    <Compile Include="Result\ResultSmsInfo.cs" />
+    <Compile Include="Result\ResultSmsList.cs" />
+    <Compile Include="SmsDetailInfo.cs" />
     <Compile Include="SmsInfo.cs" />
     <Compile Include="XmlContactWay.cs" />
   </ItemGroup>

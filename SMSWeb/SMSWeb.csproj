@@ -110,7 +110,8 @@
   <ItemGroup>
     <Compile Include="Areas\Addr\AddrAreaRegistration.cs" />
     <Compile Include="Areas\Addr\Controllers\ContactorController.cs" />
-    <Compile Include="Areas\Addr\Controllers\CotactorGroupController.cs" />
+    <Compile Include="Areas\Addr\Controllers\ContactorGroupController.cs" />
+    <Compile Include="Common\BaseController.cs" />
     <Compile Include="Common\StaticFileHelper.cs" />
     <Compile Include="Common\UserContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -416,7 +417,9 @@
     <Content Include="Assets\js\x-editable\ace-editable.min.js" />
     <Content Include="Assets\js\x-editable\bootstrap-editable.min.js" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -497,9 +500,21 @@
       <Project>{86fdd50f-424d-476e-b527-08412fbdc5fb}</Project>
       <Name>Public-Library</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SMS.BLL\SMS.BLL.csproj">
+      <Project>{e3633f52-a388-4084-a15b-7ed9c712a9d2}</Project>
+      <Name>SMS.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SMS.IDAL\SMS.IDAL.csproj">
+      <Project>{bf35af19-3d93-4d5c-9f60-d16ccfe711da}</Project>
+      <Name>SMS.IDAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SMS.Model\SMS.Model.csproj">
       <Project>{091e37ec-8833-4c58-bbe6-980e9dec8694}</Project>
       <Name>SMS.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SMS.SQLServerDAL\SMS.SQLServerDAL.csproj">
+      <Project>{2debf301-4edc-415e-b41e-d88705fc25f1}</Project>
+      <Name>SMS.SQLServerDAL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
