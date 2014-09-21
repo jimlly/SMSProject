@@ -7285,7 +7285,7 @@ END</a:Procedure.Text>
 <a:Code>UP_SMS_GetSmsDetailList</a:Code>
 <a:CreationDate>1408175250</a:CreationDate>
 <a:Creator>jimlly</a:Creator>
-<a:ModificationDate>1408175250</a:ModificationDate>
+<a:ModificationDate>1408178403</a:ModificationDate>
 <a:Modifier>jimlly</a:Modifier>
 <a:Procedure.Text>/*=============================================================
 
@@ -7296,20 +7296,27 @@ END</a:Procedure.Text>
 修改记录: 
 =============================================================*/
 CREATE PROCEDURE UP_SMS_GetSmsDetailList
-	@MsgID VARCHAR(20)
+	@MsgID VARCHAR(20),
+	@PageSize INT,
+	@PageIndex INT,
+	@Total INT OUTPUT
 AS
 BEGIN
 	SET NOCOUNT ON;
-	SELECT 
-		[SysID]
-      ,[MsgID]
-      ,[Mobile]
-      ,[Name]
-      ,[SendTime]
-      ,[Status]
-      ,[ChennelID]
-      ,[CreateTime] FROM dbo.SMS_TB_Send_Detail_Bill
-	WHERE MsgID=@MsgID;
+	SELECT * FROM(
+			SELECT 
+				rowid = ROW_NUMBER() OVER(ORDER BY CreateTime DESC),
+				[SysID]
+			  ,[MsgID]
+			  ,[Mobile]
+			  ,[Name]
+			  ,[SendTime]
+			  ,[Status]
+			  ,[ChennelID]
+			  ,[CreateTime] FROM dbo.SMS_TB_Send_Detail_Bill
+			WHERE MsgID=@MsgID)
+		AS T
+	WHERE t.rowid BETWEEN @PageSize * (@PageIndex - 1) + 1 AND @PageIndex * @PageSize
 	RETURN 1;
 END</a:Procedure.Text>
 </o:Procedure>

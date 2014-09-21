@@ -2,6 +2,7 @@
 using Public.Result;
 using SMS.IDAL;
 using SMS.Model;
+using SMS.Model.Result;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Text;
 
 namespace SMS.BLL
 {
-    class SmsManager
+   public class SmsManager
     {
          public ISMSDAL SmsDal { get; set; }
 
@@ -95,6 +96,23 @@ namespace SMS.BLL
             _log.Debug();
 
             return rs;
+        }
+
+        public ResultSmsList GetSmsList(int userId, string taskName, DateTime startTime, DateTime endTime, int pageSize, int pageIndex)
+        {
+            return SmsDal.GetSmsList(userId, taskName, startTime, endTime, pageSize, pageIndex);
+        }
+        public ResultSmsDetailList GetSmsDetailList(string msgId, int pageSize, int pageIndex)
+        {
+            return SmsDal.GetSmsDetailList(msgId, pageSize, pageIndex);
+        }
+        public ResultSmsInfo GetSmsInfo(string msgId, int userId)
+        {
+            return SmsDal.GetSmsInfo(msgId, userId);
+        }
+        public ResultSmsDetailInfo GetSmsDetailInfo(int msgDetailId, string msgId)
+        {
+            return SmsDal.GetSmsDetailInfo(msgDetailId, msgId);
         }
     }
 }

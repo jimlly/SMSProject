@@ -1,4 +1,7 @@
-﻿using SMS.BLL.Addr;
+﻿using Public.Json;
+using Public.Result;
+using SMS.BLL.Addr;
+using SMS.Model.Addr;
 using SMS.Model.Result;
 using SMSWeb.Common;
 using System;
@@ -59,7 +62,7 @@ namespace SMSWeb.Areas.Addr.Controllers
 
         public ActionResult Edit(string contactId, string groupId)
         {
-          
+
             //ViewData["ContactorID"] = contactorId;
             //ViewData["GroupID"] = groupId;
             ViewBag.ContactorID = contactId;
@@ -121,7 +124,7 @@ namespace SMSWeb.Areas.Addr.Controllers
                 string str;
                 int pageIndex = Convert.ToInt32(Request["pageindex"]);
                 int pageSize = Convert.ToInt32(Request["pagesize"]);
-                var searchContent =Request["search"];
+                var searchContent = Request["search"];
                 var groupId = Convert.ToInt32(Request["groupid"]);
 
 
@@ -146,7 +149,7 @@ namespace SMSWeb.Areas.Addr.Controllers
 
                 if (!_rcl.State)
                 {
-                  
+
                 }
                 else
                 {
@@ -182,6 +185,90 @@ namespace SMSWeb.Areas.Addr.Controllers
                 //_log.Append("AddressPageHandler错误", ex.ToString());
             }
             return Content("");
+        }
+
+
+        /// <summary>彻底删除联系人
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public bool DelContact(List<int> contactIds)
+        {
+            try
+            {
+
+                var cm = new ContactorManager();
+                var ls = new List<Contactor>();
+
+                if (contactIds.Count > 0)
+                    ls.AddRange(contactIds.Select(item => new Contactor() { ContactorID = Convert.ToInt32(item) }));
+
+                BaseResult br = cm.DelContactors(LoginInfo.UserID, ls, LoginInfo.CompID);
+
+
+                return br.State;
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return false;
+        }
+
+        /// <summary>添加联系人
+        /// </summary>
+        /// <returns></returns>
+        // /Addr/Contactor/AddContact
+        [HttpPost] 
+        public bool AddContact(Contactor contact)
+        {
+            try
+            {
+
+
+                var cm = new ContactorManager();
+
+                //  Contactor contact = JsonHelper.FromJsonTo<Contactor>(jsonContact);
+
+                BaseResult br = cm.AddContactor(LoginInfo.UserID, contact, LoginInfo.CompID);
+
+
+                return br.State;
+
+            }
+            catch (Exception ex)
+            {
+            }
+            return false;
+        }
+
+        /// <summary>获取联系人详细信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult GetContactDetail(int contactId)
+        {
+            try
+            {
+
+                var cm = new ContactorManager();
+
+                ResultContactorDetail rcd = cm.GetDetail(LoginInfo.UserID, contactId, LoginInfo.CompID);
+
+                if (rcd.State)
+                {
+
+                    return Json(rcd.ContactorInfo, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
+
         }
     }
 }

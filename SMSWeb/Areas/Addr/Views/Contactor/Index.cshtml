@@ -156,11 +156,11 @@
 
         //验证组名
         var checkGroupName = function (name) {
-           @* var groupNameRegex= @UserContext.Current.GroupNameRegex;
+            var groupNameRegex= eval("/@UserContext.Current.GroupNameRegex/");
             if (groupNameRegex.test(name)) {
                 return true;
             }
-            return false;*@
+            return false;
             return true;
         };
 
@@ -169,6 +169,7 @@
             $("loading").hide();
             $("#ExchangeModel").hide();
         }
+
           </script>
     <script src="@Url.StaticFile("~/assets/js/jquery.mCustomScrollbar.js")"></script>
     <script src="@Url.StaticFile("~/assets/js/jquery.pagination.js")"></script>

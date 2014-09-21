@@ -52,8 +52,8 @@
 		<![endif]-->
        
 </head>
-	<body>
-		<div class="navbar navbar-default" id="navbar">
+	<body class="navbar-fixed breadcrumbs-fixed">
+		<div class="navbar navbar-default navbar-fixed-top" id="navbar">
 			
             @RenderPage("~/Views/Shared/_Header.cshtml")
 			
@@ -75,12 +75,12 @@
 					@RenderBody()
 				</div><!-- /.main-content -->
 
-				<div class="ace-settings-container" id="ace-settings-container">
+				<div class="ace-settings-container" id="ace-settings-container" style="display:none">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
 						<i class="icon-cog bigger-150"></i>
 					</div>
 
-					<div class="ace-settings-box" id="ace-settings-box">
+					<div class="ace-settings-box" id="ace-settings-box" >
 						<div>
 							<div class="pull-left">
 								<select id="skin-colorpicker" class="hide">
@@ -108,7 +108,7 @@
 							<label class="lbl" for="ace-settings-breadcrumbs">固定面包屑</label>
 						</div>
 
-						<div>
+						@*<div>
 							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
 							<label class="lbl" for="ace-settings-rtl">切换到左边</label>
 						</div>
@@ -119,7 +119,7 @@
 								切换窄屏
 								<b></b>
 							</label>
-						</div>
+						</div>*@
 					</div>
 				</div><!-- /#ace-settings-container -->
 			</div><!-- /.main-container-inner -->

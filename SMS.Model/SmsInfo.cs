@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Web.Mvc;
 
 namespace SMS.Model
 {
@@ -10,6 +12,8 @@ namespace SMS.Model
        /// <summary>
         /// TaskName
         /// </summary>
+       [Display(Name="任务名称")]
+       [Required]
 		public string TaskName { get; set; }
 		/// <summary>
         /// MsgID
@@ -22,6 +26,8 @@ namespace SMS.Model
 		/// <summary>
         /// Sender
         /// </summary>
+        [Display(Name = "手机号码")]
+        [Required]
 		public string Sender { get; set; }
 		/// <summary>
         /// Priority
@@ -38,6 +44,8 @@ namespace SMS.Model
 		/// <summary>
         /// SendTime
         /// </summary>
+        [Display(Name = "定时发送")]
+       
 		public DateTime SendTime { get; set; }
 		/// <summary>
         /// SubmitTime
@@ -46,6 +54,8 @@ namespace SMS.Model
 		/// <summary>
         /// Message
         /// </summary>
+        [Display(Name = "短信内容")]
+        [Required]
 		public string Message { get; set; }
 		/// <summary>
         /// Status
@@ -74,6 +84,8 @@ namespace SMS.Model
 		/// <summary>
         /// 1 普通短信 2 长短信 3 免费短信
         /// </summary>
+        [Display(Name = "类别")]
+        [Required]
 		public SmsType SmsType { get; set; }
 		/// <summary>
         /// Amount

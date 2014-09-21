@@ -1,4 +1,5 @@
-﻿using SMS.Model;
+﻿using SMS.BLL;
+using SMS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,16 @@ namespace SMSWeb.Common
 {
     public class BaseController : Controller
     {
-
+        private SmsManager _smsManager;
+        public SmsManager SmsManager {
+            get {
+                if (_smsManager == null)
+                {
+                    _smsManager = new SmsManager();
+                }
+                return _smsManager;
+            }
+        }
         public LoginInfo LoginInfo {
             get {
                 

@@ -53,6 +53,7 @@
         
         
     </div>
+
 <script>
     
     $(document).ready(function() {
@@ -68,7 +69,7 @@
     });
     
     var checkName=function (name) {
-        var contactNameRegex =  eval("@UserContext.Current.UserNameRegex") ;
+        var contactNameRegex = eval("/@UserContext.Current.UserNameRegex/") ;
         if(!contactNameRegex.test(name)) {
             window.jBox.tip('联系人格式不对，不能为空也不能包含数字和符号', 'error');
             return false;
@@ -76,15 +77,16 @@
         return true;
     };
 
-    var mobilRegex =" @UserContext.Current.MobilezhRegex";
-    var telePhoneRegex = "@UserContext.Current.TelePhoneRegex";// <%=TelePhoneRegex%>;
-    var emailRegex ="@UserContext.Current.EmailRegex";// <%=EmalRegex%>;
+    var mobilRegex =eval("/@UserContext.Current.MobilezhRegex/");
+    var telePhoneRegex = eval("/@UserContext.Current.TelePhoneRegex/");// <%=TelePhoneRegex%>;
+    var emailRegex =eval("/@UserContext.Current.EmailRegex/");// <%=EmalRegex%>;
     
     var checkWay = function(way) {
         for (var i = 0; i < way.length; i++) {
             switch (way[i].ContactWayType) {
                 case "1":
-                    if(!mobilRegex.test(way[i].Way)) {
+                    if (!mobilRegex.test(way[i].Way)) {
+                        console.log(way[i].Way);
                         window.jBox.tip('手机号码格式错误', 'error');
                         return false;
                     }
@@ -107,5 +109,7 @@
         }
         return true;
     };
+    
 </script>
+    
 

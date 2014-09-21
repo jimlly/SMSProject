@@ -30,8 +30,17 @@ namespace SMS.IDAL
        /// <returns></returns>
        ResultSmsDetailList GetSmsDetailList(string MsgId, int pageSize, int pageIndex);
 
-
-       ResultSmsInfo GetSmsInfo(string MsgId);
-       ResultSmsDetailInfo GetSmsDetailInfo(int MsgDetailId);
+       /// <summary>
+       /// 获取单条信息
+       /// </summary>
+       /// <param name="MsgId"></param>
+       /// <returns></returns>
+       ResultSmsInfo GetSmsInfo(string MsgId,int UserId);
+       /// <summary>
+       /// 获取单条名细信息
+       /// </summary>
+       /// <param name="MsgDetailId"></param>
+       /// <returns></returns>
+       ResultSmsDetailInfo GetSmsDetailInfo(int MsgDetailId,string MsgId);
     }
 }
